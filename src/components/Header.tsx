@@ -85,13 +85,20 @@ const Header: React.FC = () => {
       {/* Mobile menu */}
       {mobileOpen && (
         <div
-          className="md:hidden fixed inset-0 z-40 bg-black/50 flex"
+          className="md:hidden fixed inset-0 z-40 flex"
+          style={{ background: 'rgba(0,0,0,0.5)' }}
           onClick={() => setMobileOpen(false)}
         >
+          {/* Sidebar slides in from the right */}
           <div
-            className={`ml-auto w-4/5 max-w-xs h-full bg-white shadow-2xl p-8 flex flex-col gap-6 transition-transform duration-300 ${
-              isScrolled ? 'pt-8' : 'pt-12'
-            }`}
+            className={`fixed right-0 top-0 h-full w-4/5 max-w-xs bg-white shadow-2xl p-8 flex flex-col gap-6 transition-transform duration-300 transform ${
+              mobileOpen ? 'translate-x-0' : 'translate-x-full'
+            } ${isScrolled ? 'pt-8' : 'pt-12'}`}
+            style={{
+              borderTopLeftRadius: '1rem',
+              borderBottomLeftRadius: '1rem',
+              minHeight: '100vh',
+            }}
             onClick={(e) => e.stopPropagation()}
           >
             <nav className="flex flex-col gap-6">
