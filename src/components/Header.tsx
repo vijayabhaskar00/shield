@@ -48,9 +48,14 @@ const Header: React.FC = () => {
           </a>
         </nav>
         <div>
-          <button className="bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700 transition-colors font-medium">
+          <a
+            href="https://shield.studenttribe.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700 transition-colors font-medium inline-block text-center"
+          >
             Get Covered
-          </button>
+          </a>
         </div>
       </div>
     </header>
