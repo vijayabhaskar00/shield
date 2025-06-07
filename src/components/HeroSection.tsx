@@ -48,7 +48,7 @@ const HeroSection: React.FC = () => {
                 {/* Main Image Card */}
                 <div className="relative mb-6 sm:mb-8">
                   <img 
-                    src="https://images.pexels.com/photos/6147369/pexels-photo-6147369.jpeg" 
+                    src="/Student_Insurance.jpg"
                     alt="Student protected by Shield" 
                     className="rounded-lg object-cover h-[300px] sm:h-[350px] md:h-[400px] w-full"
                   />
