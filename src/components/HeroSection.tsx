@@ -15,8 +15,8 @@ const HeroSection: React.FC = () => {
               🚨 Don't wait until it's too late!
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              🎓 India's 1st insurance plan designed just for students. 
-              <span className="text-yellow-300">Student Shield's got your back.</span>
+              🎓 India's 1st insurance plan designed just for students. <br></br>
+              <span className="text-yellow-300">Student Shield got your back.</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl mb-8 text-red-100">
               <span className="font-bold">1 in 3 students face unexpected emergencies.</span> Don't be caught off guard - protect your health, phone, and future from just ₹199/month.
