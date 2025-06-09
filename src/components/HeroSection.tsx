@@ -11,15 +11,20 @@ const HeroSection: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
           {/* Left Content */}
           <div className="w-full lg:w-1/2 text-white mb-8 lg:mb-0">
-            <div className="inline-block bg-red-900/30 backdrop-blur-sm px-4 py-2 rounded-full text-yellow-300 font-semibold mb-6 animate-pulse">
-              🚨 Don't wait until it's too late!
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400/80 via-yellow-300/80 to-yellow-200/80 text-red-900 font-bold px-5 py-2 rounded-full shadow-lg mb-6 animate-pulse border border-yellow-300/60">
+              <span className="text-xl">🚨</span>
+              <span className="tracking-wide">Don't wait until it's too late!</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              🎓 India's 1st insurance plan designed just for students. <br></br>
-              <span className="text-yellow-300">Student Shield got your back.</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight drop-shadow-lg">
+              <span className="block">🎓 India's 1<sup className="text-base align-super">st</sup> insurance plan</span>
+              <span className="block">designed <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent">just for students.</span></span>
+              <span className="block mt-2 text-yellow-300 drop-shadow-lg">Student Shield got your back.</span>
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-red-100">
-              <span className="font-bold">1 in 3 students face unexpected emergencies.</span> Don't be caught off guard - protect your health, phone, and future from just ₹199/month.
+            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-red-100/90 font-medium max-w-2xl">
+              <span className="font-bold text-white">1 in 3 students face unexpected emergencies.</span>
+              <br className="hidden sm:block" />
+              <span className="text-yellow-100">Don&apos;t be caught off guard</span>
+              — protect your <span className="text-yellow-300 font-semibold">health</span>, <span className="text-yellow-300 font-semibold">phone</span>, and <span className="text-yellow-300 font-semibold">future</span> from just <span className="font-bold text-yellow-200">₹199/month</span>.
             </p>
             
             {/* Buttons */}
