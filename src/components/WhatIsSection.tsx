@@ -11,7 +11,7 @@ const WhatIsSection: React.FC = () => {
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Student Shield is India's 1st insurance plan designed just for students. 
-            It covers health, accidents, and even those tragic broken phones.
+            It covers health and accidents.
           </p>
         </div>
 
@@ -26,7 +26,7 @@ const WhatIsSection: React.FC = () => {
           <div className="md:w-1/2 space-y-8">
             <p className="text-lg text-gray-700 leading-relaxed">
               We know college life comes with unexpected moments—Student Shield makes sure you're ready. 
-              Whether it's an emergency visit to the hospital or a cracked screen from a campus fall, 
+              Whether it's an emergency visit to the hospital or an accident. 
               we're here to cover you.
             </p>
             
@@ -51,8 +51,8 @@ const WhatIsSection: React.FC = () => {
                 <div className="bg-orange-100 rounded-full w-12 h-12 flex items-center justify-center mb-4">
                   <Smartphone className="h-6 w-6 text-orange-600" />
                 </div>
-                <h3 className="font-semibold text-gray-800 mb-2">Gadget Shield</h3>
-                <p className="text-gray-600">For your precious devices</p>
+                <h3 className="font-semibold text-gray-800 mb-2">St.Shield</h3>
+                <p className="text-gray-600">For your precious life</p>
               </div>
             </div>
           </div>

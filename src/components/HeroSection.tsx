@@ -24,7 +24,7 @@ const HeroSection: React.FC = () => {
               <span className="font-bold text-white">1 in 3 students face unexpected emergencies.</span>
               <br className="hidden sm:block" />
               <span className="text-yellow-100">Don&apos;t be caught off guard</span>
-              — protect your <span className="text-yellow-300 font-semibold">health</span>, <span className="text-yellow-300 font-semibold">phone</span>, and <span className="text-yellow-300 font-semibold">future</span> from just <span className="font-bold text-yellow-200">₹199/month</span>.
+              — protect your <span className="text-yellow-300 font-semibold">health</span> and <span className="text-yellow-300 font-semibold">future</span> from just <span className="font-bold text-yellow-200">₹199/month</span>.
             </p>
             
             {/* Buttons */}
@@ -41,7 +41,7 @@ const HeroSection: React.FC = () => {
             {/* Limited Time Offer */}
             <div className="bg-red-900/30 backdrop-blur-sm p-4 sm:p-6 rounded-lg border border-red-500/30">
               <p className="text-red-100 font-medium text-sm sm:text-base">
-                ⚡️ <span className="text-yellow-300">Limited Time Offer:</span> First month at ₹99 + free phone screen protection!
+                ⚡️ <span className="text-yellow-300">Limited Time Offer:</span> Yearly at ₹999 Only
               </p>
             </div>
           </div>
@@ -70,8 +70,8 @@ const HeroSection: React.FC = () => {
                     <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-red-300" />
                   </div>
                   <div>
-                    <h3 className="text-white font-semibold text-sm sm:text-base">Device Protection</h3>
-                    <p className="text-red-100 text-xs sm:text-sm">Cracked screen? We've got you covered.</p>
+                    <h3 className="text-white font-semibold text-sm sm:text-base">St.Shield Protection</h3>
+                    <p className="text-red-100 text-xs sm:text-sm">Emergencies? We've got you covered.</p>
                   </div>
                 </div>
                 

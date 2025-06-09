@@ -48,38 +48,48 @@ const HowItWorksSection: React.FC = () => {
           <div className="space-y-12 md:space-y-0">
             {steps.map((step, index) => (
               <div key={index} className="relative">
-                <div className={`md:flex ${index % 2 === 0 ? '' : 'md:flex-row-reverse'} items-center`}>
-                  {/* Timeline dot */}
-                  <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full border-4 border-white bg-indigo-600 z-10"></div>
-                  
-                  <div className="md:w-1/2 mb-8 md:mb-0 md:pr-12 md:text-right">
-                    {index % 2 === 0 ? (
-                      <div className={`${index % 2 === 0 ? 'md:ml-auto' : ''} max-w-md`}>
-                        <div className="flex md:justify-end items-center mb-4">
-                          <div className={`${step.color} rounded-full w-12 h-12 flex items-center justify-center md:order-last md:ml-4`}>
-                            {step.icon}
-                          </div>
-                          <h3 className="text-xl font-bold text-gray-800 md:mr-4">{step.title}</h3>
-                        </div>
-                        <p className="text-gray-600">{step.description}</p>
-                      </div>
-                    ) : null}
-                  </div>
-                  
-                  <div className="md:w-1/2 md:pl-12">
-                    {index % 2 !== 0 ? (
-                      <div className={`${index % 2 === 0 ? '' : 'md:mr-auto'} max-w-md`}>
-                        <div className="flex items-center mb-4">
-                          <div className={`${step.color} rounded-full w-12 h-12 flex items-center justify-center mr-4`}>
-                            {step.icon}
-                          </div>
-                          <h3 className="text-xl font-bold text-gray-800">{step.title}</h3>
-                        </div>
-                        <p className="text-gray-600">{step.description}</p>
-                      </div>
-                    ) : null}
-                  </div>
+          <div className={`md:flex ${index % 2 === 0 ? '' : 'md:flex-row-reverse'} items-center`}>
+            {/* Timeline dot */}
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full border-4 border-white bg-indigo-600 z-10"></div>
+            
+            {/* Mobile layout */}
+            <div className="md:hidden flex flex-col items-center text-center mb-8">
+              <div className={`${step.color} rounded-full w-12 h-12 flex items-center justify-center mb-4`}>
+                {step.icon}
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">{step.title}</h3>
+              <p className="text-gray-600">{step.description}</p>
+            </div>
+
+            {/* Desktop layout */}
+            <div className="hidden md:block md:w-1/2 mb-8 md:mb-0 md:pr-12 md:text-right">
+              {index % 2 === 0 ? (
+                <div className={`${index % 2 === 0 ? 'md:ml-auto' : ''} max-w-md`}>
+            <div className="flex md:justify-end items-center mb-4">
+              <div className={`${step.color} rounded-full w-12 h-12 flex items-center justify-center md:order-last md:ml-4`}>
+                {step.icon}
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 md:mr-4">{step.title}</h3>
+            </div>
+            <p className="text-gray-600">{step.description}</p>
                 </div>
+              ) : null}
+            </div>
+            
+            <div className="hidden md:block md:w-1/2 md:pl-12">
+              {index % 2 !== 0 ? (
+                <div className={`${index % 2 === 0 ? '' : 'md:mr-auto'} max-w-md`}>
+            <div className="flex items-center mb-4">
+              <div className={`${step.color} rounded-full w-12 h-12 flex items-center justify-center mr-4`}>
+                {step.icon}
+              </div>
+              <h3 className="text-xl font-bold text-gray-800">{step.title}</h3>
+            </div>
+            <p className="text-gray-600">{step.description}</p>
+                </div>
+              ) : null}
+            </div>
+          </div>
               </div>
             ))}
           </div>
