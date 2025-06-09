@@ -18,7 +18,7 @@ const WhatIsSection: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-12 items-center">
           <div className="md:w-1/2">
             <img 
-              src="https://images.pexels.com/photos/5212700/pexels-photo-5212700.jpeg" 
+              src="/stshield.jpg" 
               alt="Students protected" 
               className="rounded-xl shadow-2xl"
             />
