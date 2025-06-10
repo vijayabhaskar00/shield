@@ -1,164 +1,232 @@
-import React, { useState } from 'react';
-import { ArrowLeft, Shield, Users, CheckCircle, X, ChevronDown, Download, Mail, Phone } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from "react";
+import {
+    ArrowLeft,
+    Shield,
+    Users,
+    CheckCircle,
+    X,
+    ChevronDown,
+    Mail,
+    Phone,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface FormData {
-  name: string;
-  gender: string;
-  phone: string;
-  email: string;
-  dateOfBirth: string;
-  aadharNumber: string;
-  address: string;
-  city: string;
-  state: string;
-  pincode: string;
-  nomineeFullName: string;
-  nomineeRelationship: string;
-  nomineeGender: string;
-  nomineeDateOfBirth: string;
-  planType: 'student-shield' | 'student-shield-plus' | '';
+    name: string;
+    gender: string;
+    phone: string;
+    email: string;
+    dateOfBirth: string;
+    aadharNumber: string;
+    address: string;
+    city: string;
+    state: string;
+    pincode: string;
+    nomineeFullName: string;
+    nomineeRelationship: string;
+    nomineeGender: string;
+    nomineeDateOfBirth: string;
+    planType: "student-shield" | "student-shield-plus" | "";
 }
 
 interface PolicyFormProps {
-  isOpen: boolean;
-  onClose: () => void;
-  selectedPlan?: 'student-shield' | 'student-shield-plus';
+    isOpen: boolean;
+    onClose: () => void;
+    selectedPlan?: "student-shield" | "student-shield-plus";
 }
 
-const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }) => {
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    gender: '',
-    phone: '',
-    email: '',
-    dateOfBirth: '',
-    aadharNumber: '',
-    address: '',
-    city: '',
-    state: '',
-    pincode: '',
-    nomineeFullName: '',
-    nomineeRelationship: '',
-    nomineeGender: '',
-    nomineeDateOfBirth: '',
-    planType: selectedPlan || ''
-  });
-  const [errors, setErrors] = useState<Partial<FormData>>({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [showPlanDropdown, setShowPlanDropdown] = useState(false);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [paymentData, setPaymentData] = useState<any>(null);
-
-  const plans = {
-    'student-shield': {
-      name: 'Student Shield',
-      price: 1,
-      ageRange: '18-65 years',
-      description: 'Complete student protection package',
-      features: ['Personal Accident Cover (₹10 Lakhs)', 'Hospital Daily Cash', 'MiCare Wellness'],
-      color: 'red',
-      gradient: 'from-red-600 to-red-700'
-    },
-    'student-shield-plus': {
-      name: 'Student Shield Plus',
-      price: 1500,
-      ageRange: '40-60 years',
-      description: 'Enhanced protection with life coverage',
-      features: ['Term Life Cover (₹3 Lakhs)', 'MiCare Wellness', 'Premium Services'],
-      color: 'red',
-      gradient: 'from-red-700 to-red-800'
-    }
-  };
-
-  const indianStates = [
-    'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 
-    'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 
-    'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 
-    'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 
-    'Uttarakhand', 'West Bengal'
-];
-
-
-  const relationships = [
-    'Spouse', 'Son', 'Daughter', 'Father', 'Mother', 'Brother', 'Sister', 
-    'Grandfather', 'Grandmother', 'Uncle', 'Aunt', 'Cousin', 'Other'
-  ];
-
-  const validateStep1 = () => {
-    const newErrors: Partial<FormData> = {};
-    if (!formData.planType) newErrors.planType = 'Please select a plan';
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const validateStep2 = () => {
-    const newErrors: Partial<FormData> = {};
-    
-    // Personal Information Validation
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (!formData.gender) newErrors.gender = 'Gender is required';
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
-    }
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ''))) {
-      newErrors.phone = 'Phone number must be 10 digits';
-    }
-    if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
-    if (!formData.aadharNumber.trim()) {
-      newErrors.aadharNumber = 'Aadhar number is required';
-    } else if (!/^\d{12}$/.test(formData.aadharNumber.replace(/\D/g, ''))) {
-      newErrors.aadharNumber = 'Aadhar number must be 12 digits';
-    }
-    
-    // Address Validation
-    if (!formData.address.trim()) newErrors.address = 'Address is required';
-    if (!formData.city.trim()) newErrors.city = 'City is required';
-    if (!formData.state) newErrors.state = 'State is required';
-    if (!formData.pincode.trim()) {
-      newErrors.pincode = 'Pincode is required';
-    } else if (!/^\d{6}$/.test(formData.pincode)) {
-      newErrors.pincode = 'Pincode must be 6 digits';
+const PolicyForm: React.FC<PolicyFormProps> = ({
+    isOpen,
+    onClose,
+    selectedPlan,
+}) => {
+    const [step, setStep] = useState(1);
+    const [formData, setFormData] = useState<FormData>({
+        name: "",
+        gender: "",
+        phone: "",
+        email: "",
+        dateOfBirth: "",
+        aadharNumber: "",
+        address: "",
+        city: "",
+        state: "",
+        pincode: "",
+        nomineeFullName: "",
+        nomineeRelationship: "",
+        nomineeGender: "",
+        nomineeDateOfBirth: "",
+        planType: selectedPlan || "",
+    });
+    const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+    const [isLoading, setIsLoading] = useState(false);
+    const [showPlanDropdown, setShowPlanDropdown] = useState(false);
+    const [paymentSuccess, setPaymentSuccess] = useState(false);
+    interface PaymentData {
+        paymentId: string;
+        customerReference?: string;
+        policyNumber?: string;
+        amount: number;
+        planName: string;
+        timestamp: string;
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+    const [paymentData, setPaymentData] = useState<PaymentData | null>(null);
 
-  const validateStep3 = () => {
-    const newErrors: Partial<FormData> = {};
-    
-    // Nominee Information Validation
-    if (!formData.nomineeFullName.trim()) newErrors.nomineeFullName = 'Nominee name is required';
-    if (!formData.nomineeRelationship) newErrors.nomineeRelationship = 'Nominee relationship is required';
-    if (!formData.nomineeGender) newErrors.nomineeGender = 'Nominee gender is required';
-    if (!formData.nomineeDateOfBirth) newErrors.nomineeDateOfBirth = 'Nominee date of birth is required';
+    const plans = {
+        "student-shield": {
+            name: "Student Shield",
+            price: 1,
+            ageRange: "18-65 years",
+            description: "Complete student protection package",
+            features: [
+                "Personal Accident Cover (₹10 Lakhs)",
+                "Hospital Daily Cash",
+                "MiCare Wellness",
+            ],
+            color: "red",
+            gradient: "from-red-600 to-red-700",
+        },
+        "student-shield-plus": {
+            name: "Student Shield Plus",
+            price: 1500,
+            ageRange: "40-60 years",
+            description: "Enhanced protection with life coverage",
+            features: [
+                "Term Life Cover (₹3 Lakhs)",
+                "MiCare Wellness",
+                "Premium Services",
+            ],
+            color: "red",
+            gradient: "from-red-700 to-red-800",
+        },
+    };
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+    const indianStates = [
+        "Andhra Pradesh",
+        "Arunachal Pradesh",
+        "Assam",
+        "Bihar",
+        "Chhattisgarh",
+        "Goa",
+        "Gujarat",
+        "Haryana",
+        "Himachal Pradesh",
+        "Jharkhand",
+        "Karnataka",
+        "Kerala",
+        "Madhya Pradesh",
+        "Maharashtra",
+        "Manipur",
+        "Meghalaya",
+        "Mizoram",
+        "Nagaland",
+        "Odisha",
+        "Punjab",
+        "Rajasthan",
+        "Sikkim",
+        "Tamil Nadu",
+        "Telangana",
+        "Tripura",
+        "Uttar Pradesh",
+        "Uttarakhand",
+        "West Bengal",
+    ];
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: '' }));
-    }
-  };
+    const relationships = [
+        "Spouse",
+        "Son",
+        "Daughter",
+        "Father",
+        "Mother",
+        "Brother",
+        "Sister",
+        "Grandfather",
+        "Grandmother",
+        "Uncle",
+        "Aunt",
+        "Cousin",
+        "Other",
+    ];
 
-  const handleNext = () => {
-    if (step === 1 && validateStep1()) {
-      setStep(2);
-    } else if (step === 2 && validateStep2()) {
-      setStep(3);
-    } else if (step === 3 && validateStep3()) {
-      setStep(4);
-    }
-  };
+    const validateStep1 = () => {
+        const newErrors: Partial<Record<keyof FormData, string>> = {};
+        if (!formData.planType) newErrors.planType = "Please select a plan";
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const validateStep2 = () => {
+        const newErrors: Partial<Record<keyof FormData, string>> = {};
+
+        // Personal Information Validation
+        if (!formData.name.trim()) newErrors.name = "Name is required";
+        if (!formData.gender) newErrors.gender = "Gender is required";
+        if (!formData.email.trim()) {
+            newErrors.email = "Email is required";
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = "Email is invalid";
+        }
+        if (!formData.phone.trim()) {
+            newErrors.phone = "Phone number is required";
+        } else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ""))) {
+            newErrors.phone = "Phone number must be 10 digits";
+        }
+        if (!formData.dateOfBirth)
+            newErrors.dateOfBirth = "Date of birth is required";
+        if (!formData.aadharNumber.trim()) {
+            newErrors.aadharNumber = "Aadhar number is required";
+        } else if (!/^\d{12}$/.test(formData.aadharNumber.replace(/\D/g, ""))) {
+            newErrors.aadharNumber = "Aadhar number must be 12 digits";
+        }
+
+        // Address Validation
+        if (!formData.address.trim()) newErrors.address = "Address is required";
+        if (!formData.city.trim()) newErrors.city = "City is required";
+        if (!formData.state) newErrors.state = "State is required";
+        if (!formData.pincode.trim()) {
+            newErrors.pincode = "Pincode is required";
+        } else if (!/^\d{6}$/.test(formData.pincode)) {
+            newErrors.pincode = "Pincode must be 6 digits";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const validateStep3 = () => {
+        const newErrors: Partial<Record<keyof FormData, string>> = {};
+
+        // Nominee Information Validation
+        if (!formData.nomineeFullName.trim())
+            newErrors.nomineeFullName = "Nominee name is required";
+        if (!formData.nomineeRelationship)
+            newErrors.nomineeRelationship = "Nominee relationship is required";
+        if (!formData.nomineeGender)
+            newErrors.nomineeGender = "Nominee gender is required";
+        if (!formData.nomineeDateOfBirth)
+            newErrors.nomineeDateOfBirth = "Nominee date of birth is required";
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleInputChange = (field: keyof FormData, value: string) => {
+        setFormData((prev) => ({ ...prev, [field]: value }));
+        if (errors[field]) {
+            setErrors((prev) => ({ ...prev, [field]: "" }));
+        }
+    };
+
+    const handleNext = () => {
+        if (step === 1 && validateStep1()) {
+            setStep(2);
+        } else if (step === 2 && validateStep2()) {
+            setStep(3);
+        } else if (step === 3 && validateStep3()) {
+            setStep(4);
+        }
+    };
 
   const handlePayment = async () => {
     setIsLoading(true);
@@ -178,12 +246,12 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
         name: 'Student Shield',
         description: `Payment for ${selectedPlanData.name}`,
         image: '/st.shield_logo-removebg-preview.png',
-        handler: function (response: any) {
+        handler: function (response: { razorpay_payment_id: string; razorpay_order_id: string; razorpay_signature: string }) {
           // Payment successful callback
           console.log('Payment Response:', response);
           
           // Generate customer reference with "ssst" prefix
-          const customerReference = `ssst${Date.now()}`;
+          const customerReference = `SSST${Date.now()}`;
           
           // Store payment data for thank you page
           setPaymentData({
@@ -225,11 +293,15 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
       const razorpay = new window.Razorpay(options);
       
       // Handle payment failure
-      razorpay.on('payment.failed', function (response: any) {
-        alert('Payment failed. Please try again.');
-        console.error('Payment failed:', response.error);
-        setIsLoading(false);
-      });
+    razorpay.on('payment.failed', (response: { error?: { code: string; description: string; source: string; step: string; reason: string; metadata: { order_id: string; payment_id: string; }; }; }) => {
+            if (response.error) {
+                alert('Payment failed. Please try again.');
+                console.error('Payment failed:', response.error);
+            } else {
+                console.error('Payment failed with unknown error.');
+            }
+            setIsLoading(false);
+          });
       
       razorpay.open();
     } catch (error) {
@@ -239,79 +311,100 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
     }
   };
 
-  const verifyPayment = async (paymentResponse: any) => {
-  try {
-    // TODO: Call your backend API to verify payment
-    const verificationData = {
-      razorpay_order_id: paymentResponse.razorpay_order_id,
-      razorpay_payment_id: paymentResponse.razorpay_payment_id,
-      razorpay_signature: paymentResponse.razorpay_signature,
-      user_data: formData
-    };
-    
-    // Example API call (implement your backend endpoint)
-    // const response = await fetch('/api/verify-payment', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(verificationData),
-    // });
-    
-    console.log('Payment verification data:', verificationData);
-  } catch (error) {
-    console.error('Payment verification failed:', error);
-  }
-};
-
-  const formatAadhar = (value: string) => {
-    const cleaned = value.replace(/\D/g, '');
-    const match = cleaned.match(/^(\d{0,4})(\d{0,4})(\d{0,4})$/);
-    if (match) {
-      return [match[1], match[2], match[3]].filter(Boolean).join(' ');
+    interface PaymentResponse {
+        razorpay_order_id: string;
+        razorpay_payment_id: string;
+        razorpay_signature: string;
     }
-    return value;
-  };
 
-  const selectPlan = (planKey: string) => {
-    handleInputChange('planType', planKey);
-    setShowPlanDropdown(false);
-  };
+    const verifyPayment = async (paymentResponse: PaymentResponse) => {
+        try {
+            // Prepare verification payload
+            const verificationData = {
+                razorpay_order_id: paymentResponse.razorpay_order_id,
+                razorpay_payment_id: paymentResponse.razorpay_payment_id,
+                razorpay_signature: paymentResponse.razorpay_signature,
+                user_data: formData,
+            };
+            // Call backend API
+            const res = await fetch(
+                `${import.meta.env.VITE_API_URL || ""}/api/verify-payment`,
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(verificationData),
+                }
+            );
+            const result = await res.json();
+            if (result.success) {
+                const selectedPlanData =
+                    plans[formData.planType as keyof typeof plans];
+                // Update UI with backend policy number
+                setPaymentData({
+                    paymentId: paymentResponse.razorpay_payment_id,
+                    policyNumber: result.policyNumber,
+                    amount: selectedPlanData.price,
+                    planName: selectedPlanData.name,
+                    timestamp: new Date().toLocaleString(),
+                });
+                setPaymentSuccess(true);
+            } else {
+                alert("Payment verification failed. Please contact support.");
+                console.error("Backend verification error:", result.message);
+            }
+        } catch (error) {
+            console.error("Payment verification failed:", error);
+            alert("Payment verification failed. Please try again later.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-  const handleClose = () => {
-    // Reset all states when closing
-    setStep(1);
-    setPaymentSuccess(false);
-    setPaymentData(null);
-    setFormData({
-      name: '',
-      gender: '',
-      phone: '',
-      email: '',
-      dateOfBirth: '',
-      aadharNumber: '',
-      address: '',
-      city: '',
-      state: '',
-      pincode: '',
-      nomineeFullName: '',
-      nomineeRelationship: '',
-      nomineeGender: '',
-      nomineeDateOfBirth: '',
-      planType: selectedPlan || ''
-    });
-    setErrors({});
-    setIsLoading(false);
-    setShowPlanDropdown(false);
-    onClose();
-  };
+    const formatAadhar = (value: string) => {
+        const cleaned = value.replace(/\D/g, "");
+        const match = cleaned.match(/^(\d{0,4})(\d{0,4})(\d{0,4})$/);
+        if (match) {
+            return [match[1], match[2], match[3]].filter(Boolean).join(" ");
+        }
+        return value;
+    };
 
-  const downloadPolicy = () => {
-    // Simulate policy download
-    alert('Policy document will be downloaded shortly!');
-  };
+    const selectPlan = (planKey: string) => {
+        handleInputChange("planType", planKey);
+        setShowPlanDropdown(false);
+    };
 
-  if (!isOpen) return null;
+    const handleClose = () => {
+        // Reset all states when closing
+        setStep(1);
+        setPaymentSuccess(false);
+        setPaymentData(null);
+        setFormData({
+            name: "",
+            gender: "",
+            phone: "",
+            email: "",
+            dateOfBirth: "",
+            aadharNumber: "",
+            address: "",
+            city: "",
+            state: "",
+            pincode: "",
+            nomineeFullName: "",
+            nomineeRelationship: "",
+            nomineeGender: "",
+            nomineeDateOfBirth: "",
+            planType: selectedPlan || "",
+        });
+        setErrors({});
+        setIsLoading(false);
+        setShowPlanDropdown(false);
+        onClose();
+    };
+
+    // Removed unused downloadPolicy function
+
+    if (!isOpen) return null;
 
   return (
     <AnimatePresence>
@@ -383,10 +476,15 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
                   </motion.div>
                 </div>
 
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Thank You for Choosing Student Shield!</h3>
-                  <p className="text-gray-600 mb-6">Your payment has been processed successfully. You're now protected!</p>
-                </div>
+                                <div>
+                                    <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                                        Thank You for Choosing Student Shield!
+                                    </h3>
+                                    <p className="text-gray-600 mb-6">
+                                        Your payment has been processed
+                                        successfully. You're now protected!
+                                    </p>
+                                </div>
 
                 {/* Payment Details Card */}
                 <div className="bg-white rounded-xl p-6 border border-red-200 text-left">
@@ -419,28 +517,42 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
                   </div>
                 </div>
 
-                {/* Next Steps */}
-                <div className="bg-green-50 rounded-xl p-6 border border-green-200">
-                  <h4 className="font-semibold text-green-800 mb-3">🎯 What's Next?</h4>
-                  <ul className="text-left space-y-2 text-sm text-green-700">
-                    <li className="flex items-start">
-                      <CheckCircle className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                      <span>Policy document will be sent to your email within 24 hours</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                      <span>Your coverage is active immediately</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                      <span>Save this policy number for future reference</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                      <span>Download our app for easy claim filing</span>
-                    </li>
-                  </ul>
-                </div>
+                                {/* Next Steps */}
+                                <div className="bg-green-50 rounded-xl p-6 border border-green-200">
+                                    <h4 className="font-semibold text-green-800 mb-3">
+                                        🎯 What's Next?
+                                    </h4>
+                                    <ul className="text-left space-y-2 text-sm text-green-700">
+                                        <li className="flex items-start">
+                                            <CheckCircle className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                                            <span>
+                                                Policy document will be sent to
+                                                your email within 24 hours
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <CheckCircle className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                                            <span>
+                                                Your coverage is active
+                                                immediately
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <CheckCircle className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                                            <span>
+                                                Save this policy number for
+                                                future reference
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <CheckCircle className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                                            <span>
+                                                Download our app for easy claim
+                                                filing
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
 
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -452,34 +564,43 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
                   </button>
                 </div>
 
-                {/* Contact Info */}
-                <div className="bg-red-50 rounded-xl p-4 border border-red-200">
-                  <h4 className="font-semibold text-red-800 mb-3">Need Help?</h4>
-                  <div className="flex flex-col sm:flex-row gap-4 text-sm">
-                    <div className="flex items-center gap-2 text-red-700">
-                      <Mail className="h-4 w-4" />
-                      <span>support@studentshield.in</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-red-700">
-                      <Phone className="h-4 w-4" />
-                      <span>1800-123-4567</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
+                                {/* Contact Info */}
+                                <div className="bg-red-50 rounded-xl p-4 border border-red-200">
+                                    <h4 className="font-semibold text-red-800 mb-3">
+                                        Need Help?
+                                    </h4>
+                                    <div className="flex flex-col sm:flex-row gap-4 text-sm">
+                                        <div className="flex items-center gap-2 text-red-700">
+                                            <Mail className="h-4 w-4" />
+                                            <span>
+                                                support@studentshield.in
+                                            </span>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-red-700">
+                                            <Phone className="h-4 w-4" />
+                                            <span>1800-123-4567</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
 
-            {/* Step 1: Plan Selection */}
-            {!paymentSuccess && step === 1 && (
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="space-y-6"
-              >
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Choose Your Plan</h3>
-                  <p className="text-gray-600">Select the protection plan that best fits your needs</p>
-                </div>
+                        {/* Step 1: Plan Selection */}
+                        {!paymentSuccess && step === 1 && (
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                className="space-y-6"
+                            >
+                                <div>
+                                    <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                                        Choose Your Plan
+                                    </h3>
+                                    <p className="text-gray-600">
+                                        Select the protection plan that best
+                                        fits your needs
+                                    </p>
+                                </div>
 
                 {/* Modern Plan Selector - FIXED DROPDOWN */}
                 <div className="relative">
@@ -566,399 +687,709 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
                   {errors.planType && <p className="text-red-500 text-sm mt-1">{errors.planType}</p>}
                 </div>
 
-                {/* Selected Plan Preview */}
-                {formData.planType && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`bg-gradient-to-r ${plans[formData.planType as keyof typeof plans].gradient} rounded-xl p-6 text-white`}
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <h4 className="text-lg font-semibold">
-                        {plans[formData.planType as keyof typeof plans].name}
-                      </h4>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold">₹{plans[formData.planType as keyof typeof plans].price}</div>
-                        <div className="text-sm opacity-90">/year</div>
-                      </div>
-                    </div>
-                    <p className="text-sm opacity-90 mb-3">{plans[formData.planType as keyof typeof plans].description}</p>
-                    <p className="text-xs opacity-75">Age: {plans[formData.planType as keyof typeof plans].ageRange}</p>
-                    <div className="mt-4 space-y-1">
-                      {plans[formData.planType as keyof typeof plans].features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-sm">
-                          <CheckCircle className="h-4 w-4 text-yellow-300" />
-                          {feature}
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </motion.div>
-            )}
+                                {/* Selected Plan Preview */}
+                                {formData.planType && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className={`bg-gradient-to-r ${
+                                            plans[
+                                                formData.planType as keyof typeof plans
+                                            ].gradient
+                                        } rounded-xl p-6 text-white`}
+                                    >
+                                        <div className="flex items-center justify-between mb-4">
+                                            <h4 className="text-lg font-semibold">
+                                                {
+                                                    plans[
+                                                        formData.planType as keyof typeof plans
+                                                    ].name
+                                                }
+                                            </h4>
+                                            <div className="text-right">
+                                                <div className="text-2xl font-bold">
+                                                    ₹
+                                                    {
+                                                        plans[
+                                                            formData.planType as keyof typeof plans
+                                                        ].price
+                                                    }
+                                                </div>
+                                                <div className="text-sm opacity-90">
+                                                    /year
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p className="text-sm opacity-90 mb-3">
+                                            {
+                                                plans[
+                                                    formData.planType as keyof typeof plans
+                                                ].description
+                                            }
+                                        </p>
+                                        <p className="text-xs opacity-75">
+                                            Age:{" "}
+                                            {
+                                                plans[
+                                                    formData.planType as keyof typeof plans
+                                                ].ageRange
+                                            }
+                                        </p>
+                                        <div className="mt-4 space-y-1">
+                                            {plans[
+                                                formData.planType as keyof typeof plans
+                                            ].features.map((feature, idx) => (
+                                                <div
+                                                    key={idx}
+                                                    className="flex items-center gap-2 text-sm"
+                                                >
+                                                    <CheckCircle className="h-4 w-4 text-yellow-300" />
+                                                    {feature}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </motion.div>
+                        )}
 
-            {/* Step 2: Personal Information */}
-            {!paymentSuccess && step === 2 && (
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="space-y-6"
-              >
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Personal Information</h3>
-                  <p className="text-gray-600">Please provide your personal details for the policy</p>
-                </div>
+                        {/* Step 2: Personal Information */}
+                        {!paymentSuccess && step === 2 && (
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                className="space-y-6"
+                            >
+                                <div>
+                                    <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                                        Personal Information
+                                    </h3>
+                                    <p className="text-gray-600">
+                                        Please provide your personal details for
+                                        the policy
+                                    </p>
+                                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Full Name */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.name ? 'border-red-500' : 'border-red-300'
-                      }`}
-                      placeholder="Enter your full name"
-                    />
-                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
-                  </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {/* Full Name */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Full Name *
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={formData.name}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "name",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.name
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                            placeholder="Enter your full name"
+                                        />
+                                        {errors.name && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.name}
+                                            </p>
+                                        )}
+                                    </div>
 
-                  {/* Gender */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Gender *
-                    </label>
-                    <select
-                      value={formData.gender}
-                      onChange={(e) => handleInputChange('gender', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.gender ? 'border-red-500' : 'border-red-300'
-                      }`}
-                    >
-                      <option value="">Select Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
-                    {errors.gender && <p className="text-red-500 text-xs mt-1">{errors.gender}</p>}
-                  </div>
+                                    {/* Gender */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Gender *
+                                        </label>
+                                        <select
+                                            value={formData.gender}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "gender",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.gender
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                        >
+                                            <option value="">
+                                                Select Gender
+                                            </option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">
+                                                Female
+                                            </option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                        {errors.gender && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.gender}
+                                            </p>
+                                        )}
+                                    </div>
 
-                  {/* Phone Number */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Mobile Number *
-                    </label>
-                    <input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange('phone', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.phone ? 'border-red-500' : 'border-red-300'
-                      }`}
-                      placeholder="10-digit mobile number"
-                    />
-                    {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
-                  </div>
+                                    {/* Phone Number */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Mobile Number *
+                                        </label>
+                                        <input
+                                            type="tel"
+                                            value={formData.phone}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "phone",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.phone
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                            placeholder="10-digit mobile number"
+                                        />
+                                        {errors.phone && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.phone}
+                                            </p>
+                                        )}
+                                    </div>
 
-                  {/* Email */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.email ? 'border-red-500' : 'border-red-300'
-                      }`}
-                      placeholder="your.email@example.com"
-                    />
-                    {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
-                  </div>
+                                    {/* Email */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Email Address *
+                                        </label>
+                                        <input
+                                            type="email"
+                                            value={formData.email}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "email",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.email
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                            placeholder="your.email@example.com"
+                                        />
+                                        {errors.email && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.email}
+                                            </p>
+                                        )}
+                                    </div>
 
-                  {/* Date of Birth */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Date of Birth *
-                    </label>
-                    <input
-                      type="date"
-                      value={formData.dateOfBirth}
-                      onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.dateOfBirth ? 'border-red-500' : 'border-red-300'
-                      }`}
-                    />
-                    {errors.dateOfBirth && <p className="text-red-500 text-xs mt-1">{errors.dateOfBirth}</p>}
-                  </div>
+                                    {/* Date of Birth */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Date of Birth *
+                                        </label>
+                                        <input
+                                            type="date"
+                                            value={formData.dateOfBirth}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "dateOfBirth",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.dateOfBirth
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                        />
+                                        {errors.dateOfBirth && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.dateOfBirth}
+                                            </p>
+                                        )}
+                                    </div>
 
-                  {/* Aadhar Number */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Aadhar Number *
-                    </label>
-                    <input
-                      type="text"
-                      value={formatAadhar(formData.aadharNumber)}
-                      onChange={(e) => handleInputChange('aadharNumber', e.target.value.replace(/\D/g, ''))}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.aadharNumber ? 'border-red-500' : 'border-red-300'
-                      }`}
-                      placeholder="XXXX XXXX XXXX"
-                      maxLength={14}
-                    />
-                    {errors.aadharNumber && <p className="text-red-500 text-xs mt-1">{errors.aadharNumber}</p>}
-                  </div>
+                                    {/* Aadhar Number */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Aadhar Number *
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={formatAadhar(
+                                                formData.aadharNumber
+                                            )}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "aadharNumber",
+                                                    e.target.value.replace(
+                                                        /\D/g,
+                                                        ""
+                                                    )
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.aadharNumber
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                            placeholder="XXXX XXXX XXXX"
+                                            maxLength={14}
+                                        />
+                                        {errors.aadharNumber && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.aadharNumber}
+                                            </p>
+                                        )}
+                                    </div>
 
-                  {/* Address */}
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Address *
-                    </label>
-                    <textarea
-                      value={formData.address}
-                      onChange={(e) => handleInputChange('address', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.address ? 'border-red-500' : 'border-red-300'
-                      }`}
-                      placeholder="Enter your complete address"
-                      rows={3}
-                    />
-                    {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address}</p>}
-                  </div>
+                                    {/* Address */}
+                                    <div className="md:col-span-2">
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Address *
+                                        </label>
+                                        <textarea
+                                            value={formData.address}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "address",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.address
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                            placeholder="Enter your complete address"
+                                            rows={3}
+                                        />
+                                        {errors.address && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.address}
+                                            </p>
+                                        )}
+                                    </div>
 
-                  {/* City */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      City *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.city}
-                      onChange={(e) => handleInputChange('city', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.city ? 'border-red-500' : 'border-red-300'
-                      }`}
-                      placeholder="Enter your city"
-                    />
-                    {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city}</p>}
-                  </div>
+                                    {/* City */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            City *
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={formData.city}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "city",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.city
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                            placeholder="Enter your city"
+                                        />
+                                        {errors.city && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.city}
+                                            </p>
+                                        )}
+                                    </div>
 
-                  {/* State */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      State *
-                    </label>
-                    <select
-                      value={formData.state}
-                      onChange={(e) => handleInputChange('state', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.state ? 'border-red-500' : 'border-red-300'
-                      }`}
-                    >
-                      <option value="">Select State</option>
-                      {indianStates.map((state) => (
-                        <option key={state} value={state}>{state}</option>
-                      ))}
-                    </select>
-                    {errors.state && <p className="text-red-500 text-xs mt-1">{errors.state}</p>}
-                  </div>
+                                    {/* State */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            State *
+                                        </label>
+                                        <select
+                                            value={formData.state}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "state",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.state
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                        >
+                                            <option value="">
+                                                Select State
+                                            </option>
+                                            {indianStates.map((state) => (
+                                                <option
+                                                    key={state}
+                                                    value={state}
+                                                >
+                                                    {state}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {errors.state && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.state}
+                                            </p>
+                                        )}
+                                    </div>
 
-                  {/* Pincode */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Pincode *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.pincode}
-                      onChange={(e) => handleInputChange('pincode', e.target.value.replace(/\D/g, ''))}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.pincode ? 'border-red-500' : 'border-red-300'
-                      }`}
-                      placeholder="6-digit pincode"
-                      maxLength={6}
-                    />
-                    {errors.pincode && <p className="text-red-500 text-xs mt-1">{errors.pincode}</p>}
-                  </div>
-                </div>
-              </motion.div>
-            )}
+                                    {/* Pincode */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Pincode *
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={formData.pincode}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "pincode",
+                                                    e.target.value.replace(
+                                                        /\D/g,
+                                                        ""
+                                                    )
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.pincode
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                            placeholder="6-digit pincode"
+                                            maxLength={6}
+                                        />
+                                        {errors.pincode && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.pincode}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
 
-            {/* Step 3: Nominee Information */}
-            {!paymentSuccess && step === 3 && (
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="space-y-6"
-              >
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Nominee Information</h3>
-                  <p className="text-gray-600">Please provide details of your nominee</p>
-                </div>
+                        {/* Step 3: Nominee Information */}
+                        {!paymentSuccess && step === 3 && (
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                className="space-y-6"
+                            >
+                                <div>
+                                    <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                                        Nominee Information
+                                    </h3>
+                                    <p className="text-gray-600">
+                                        Please provide details of your nominee
+                                    </p>
+                                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Nominee Full Name */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Nominee Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.nomineeFullName}
-                      onChange={(e) => handleInputChange('nomineeFullName', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.nomineeFullName ? 'border-red-500' : 'border-red-300'
-                      }`}
-                      placeholder="Enter nominee's full name"
-                    />
-                    {errors.nomineeFullName && <p className="text-red-500 text-xs mt-1">{errors.nomineeFullName}</p>}
-                  </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {/* Nominee Full Name */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Nominee Full Name *
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={formData.nomineeFullName}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "nomineeFullName",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.nomineeFullName
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                            placeholder="Enter nominee's full name"
+                                        />
+                                        {errors.nomineeFullName && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.nomineeFullName}
+                                            </p>
+                                        )}
+                                    </div>
 
-                  {/* Nominee Relationship */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Nominee Relationship *
-                    </label>
-                    <select
-                      value={formData.nomineeRelationship}
-                      onChange={(e) => handleInputChange('nomineeRelationship', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.nomineeRelationship ? 'border-red-500' : 'border-red-300'
-                      }`}
-                    >
-                      <option value="">Select Relationship</option>
-                      {relationships.map((relationship) => (
-                        <option key={relationship} value={relationship}>{relationship}</option>
-                      ))}
-                    </select>
-                    {errors.nomineeRelationship && <p className="text-red-500 text-xs mt-1">{errors.nomineeRelationship}</p>}
-                  </div>
+                                    {/* Nominee Relationship */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Nominee Relationship *
+                                        </label>
+                                        <select
+                                            value={formData.nomineeRelationship}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "nomineeRelationship",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.nomineeRelationship
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                        >
+                                            <option value="">
+                                                Select Relationship
+                                            </option>
+                                            {relationships.map(
+                                                (relationship) => (
+                                                    <option
+                                                        key={relationship}
+                                                        value={relationship}
+                                                    >
+                                                        {relationship}
+                                                    </option>
+                                                )
+                                            )}
+                                        </select>
+                                        {errors.nomineeRelationship && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.nomineeRelationship}
+                                            </p>
+                                        )}
+                                    </div>
 
-                  {/* Nominee Gender */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Nominee Gender *
-                    </label>
-                    <select
-                      value={formData.nomineeGender}
-                      onChange={(e) => handleInputChange('nomineeGender', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.nomineeGender ? 'border-red-500' : 'border-red-300'
-                      }`}
-                    >
-                      <option value="">Select Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
-                    {errors.nomineeGender && <p className="text-red-500 text-xs mt-1">{errors.nomineeGender}</p>}
-                  </div>
+                                    {/* Nominee Gender */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Nominee Gender *
+                                        </label>
+                                        <select
+                                            value={formData.nomineeGender}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "nomineeGender",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.nomineeGender
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                        >
+                                            <option value="">
+                                                Select Gender
+                                            </option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">
+                                                Female
+                                            </option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                        {errors.nomineeGender && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.nomineeGender}
+                                            </p>
+                                        )}
+                                    </div>
 
-                  {/* Nominee Date of Birth */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Nominee Date of Birth *
-                    </label>
-                    <input
-                      type="date"
-                      value={formData.nomineeDateOfBirth}
-                      onChange={(e) => handleInputChange('nomineeDateOfBirth', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                        errors.nomineeDateOfBirth ? 'border-red-500' : 'border-red-300'
-                      }`}
-                    />
-                    {errors.nomineeDateOfBirth && <p className="text-red-500 text-xs mt-1">{errors.nomineeDateOfBirth}</p>}
-                  </div>
-                </div>
+                                    {/* Nominee Date of Birth */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Nominee Date of Birth *
+                                        </label>
+                                        <input
+                                            type="date"
+                                            value={formData.nomineeDateOfBirth}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "nomineeDateOfBirth",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
+                                                errors.nomineeDateOfBirth
+                                                    ? "border-red-500"
+                                                    : "border-red-300"
+                                            }`}
+                                        />
+                                        {errors.nomineeDateOfBirth && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                {errors.nomineeDateOfBirth}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
 
-                {/* Nominee Information Note */}
-                <div className="bg-red-50 rounded-xl p-4 border border-red-200">
-                  <h4 className="font-semibold text-red-800 mb-2">📝 Important Note</h4>
-                  <p className="text-sm text-red-700">
-                    The nominee will be entitled to receive the policy benefits in case of any unfortunate event. 
-                    Please ensure all nominee details are accurate and up-to-date.
-                  </p>
-                </div>
-              </motion.div>
-            )}
+                                {/* Nominee Information Note */}
+                                <div className="bg-red-50 rounded-xl p-4 border border-red-200">
+                                    <h4 className="font-semibold text-red-800 mb-2">
+                                        📝 Important Note
+                                    </h4>
+                                    <p className="text-sm text-red-700">
+                                        The nominee will be entitled to receive
+                                        the policy benefits in case of any
+                                        unfortunate event. Please ensure all
+                                        nominee details are accurate and
+                                        up-to-date.
+                                    </p>
+                                </div>
+                            </motion.div>
+                        )}
 
-            {/* Step 4: Review & Payment */}
-            {!paymentSuccess && step === 4 && (
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="space-y-6"
-              >
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Review & Payment</h3>
-                  <p className="text-gray-600">Please review your information before proceeding</p>
-                </div>
+                        {/* Step 4: Review & Payment */}
+                        {!paymentSuccess && step === 4 && (
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                className="space-y-6"
+                            >
+                                <div>
+                                    <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                                        Review & Payment
+                                    </h3>
+                                    <p className="text-gray-600">
+                                        Please review your information before
+                                        proceeding
+                                    </p>
+                                </div>
 
-                {/* Selected Plan Summary */}
-                <div className={`bg-gradient-to-r ${plans[formData.planType as keyof typeof plans]?.gradient} rounded-xl p-6 text-white`}>
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-lg font-semibold">
-                      {plans[formData.planType as keyof typeof plans]?.name}
-                    </h4>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold">
-                        ₹{plans[formData.planType as keyof typeof plans]?.price}
-                      </div>
-                      <div className="text-sm opacity-90">/year</div>
-                    </div>
-                  </div>
-                  <p className="text-sm opacity-90 mb-2">{plans[formData.planType as keyof typeof plans]?.description}</p>
-                  <p className="text-xs opacity-75 mb-4">Age: {plans[formData.planType as keyof typeof plans]?.ageRange}</p>
-                  <div className="space-y-2">
-                    {plans[formData.planType as keyof typeof plans]?.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-sm">
-                        <CheckCircle className="h-4 w-4 text-yellow-300" />
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                                {/* Selected Plan Summary */}
+                                <div
+                                    className={`bg-gradient-to-r ${
+                                        plans[
+                                            formData.planType as keyof typeof plans
+                                        ]?.gradient
+                                    } rounded-xl p-6 text-white`}
+                                >
+                                    <div className="flex items-center justify-between mb-4">
+                                        <h4 className="text-lg font-semibold">
+                                            {
+                                                plans[
+                                                    formData.planType as keyof typeof plans
+                                                ]?.name
+                                            }
+                                        </h4>
+                                        <div className="text-right">
+                                            <div className="text-2xl font-bold">
+                                                ₹
+                                                {
+                                                    plans[
+                                                        formData.planType as keyof typeof plans
+                                                    ]?.price
+                                                }
+                                            </div>
+                                            <div className="text-sm opacity-90">
+                                                /year
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p className="text-sm opacity-90 mb-2">
+                                        {
+                                            plans[
+                                                formData.planType as keyof typeof plans
+                                            ]?.description
+                                        }
+                                    </p>
+                                    <p className="text-xs opacity-75 mb-4">
+                                        Age:{" "}
+                                        {
+                                            plans[
+                                                formData.planType as keyof typeof plans
+                                            ]?.ageRange
+                                        }
+                                    </p>
+                                    <div className="space-y-2">
+                                        {plans[
+                                            formData.planType as keyof typeof plans
+                                        ]?.features.map((feature, idx) => (
+                                            <div
+                                                key={idx}
+                                                className="flex items-center gap-2 text-sm"
+                                            >
+                                                <CheckCircle className="h-4 w-4 text-yellow-300" />
+                                                {feature}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
 
-                {/* Personal Information Summary */}
-                <div className="bg-white rounded-xl p-6 border border-red-200">
-                  <h4 className="font-semibold text-gray-800 mb-4">Personal Information</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <span className="text-gray-600">Name:</span>
-                      <div className="font-medium">{formData.name}</div>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">Gender:</span>
-                      <div className="font-medium">{formData.gender}</div>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">Phone:</span>
-                      <div className="font-medium">{formData.phone}</div>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">Email:</span>
-                      <div className="font-medium">{formData.email}</div>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">Date of Birth:</span>
-                      <div className="font-medium">{formData.dateOfBirth}</div>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">Aadhar:</span>
-                      <div className="font-medium">{formatAadhar(formData.aadharNumber)}</div>
-                    </div>
-                    <div className="md:col-span-2">
-                      <span className="text-gray-600">Address:</span>
-                      <div className="font-medium">{formData.address}, {formData.city}, {formData.state} - {formData.pincode}</div>
-                    </div>
-                  </div>
-                </div>
+                                {/* Personal Information Summary */}
+                                <div className="bg-white rounded-xl p-6 border border-red-200">
+                                    <h4 className="font-semibold text-gray-800 mb-4">
+                                        Personal Information
+                                    </h4>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                        <div>
+                                            <span className="text-gray-600">
+                                                Name:
+                                            </span>
+                                            <div className="font-medium">
+                                                {formData.name}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span className="text-gray-600">
+                                                Gender:
+                                            </span>
+                                            <div className="font-medium">
+                                                {formData.gender}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span className="text-gray-600">
+                                                Phone:
+                                            </span>
+                                            <div className="font-medium">
+                                                {formData.phone}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span className="text-gray-600">
+                                                Email:
+                                            </span>
+                                            <div className="font-medium">
+                                                {formData.email}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span className="text-gray-600">
+                                                Date of Birth:
+                                            </span>
+                                            <div className="font-medium">
+                                                {formData.dateOfBirth}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span className="text-gray-600">
+                                                Aadhar:
+                                            </span>
+                                            <div className="font-medium">
+                                                {formatAadhar(
+                                                    formData.aadharNumber
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="md:col-span-2">
+                                            <span className="text-gray-600">
+                                                Address:
+                                            </span>
+                                            <div className="font-medium">
+                                                {formData.address},{" "}
+                                                {formData.city},{" "}
+                                                {formData.state} -{" "}
+                                                {formData.pincode}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                 {/* Nominee Information Summary */}
                 <div className="bg-white rounded-xl p-6 border border-red-200">
@@ -1018,9 +1449,26 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
 
 // Add type declaration for Razorpay
 declare global {
-  interface Window {
-    Razorpay: any;
-  }
+    interface Window {
+        Razorpay: {
+            new (options: {
+                key: string;
+                amount: number;
+                currency: string;
+                name: string;
+                description: string;
+                image?: string;
+                handler: (response: { razorpay_payment_id: string; razorpay_order_id: string; razorpay_signature: string }) => void;
+                prefill?: { name?: string; email?: string; contact?: string };
+                notes?: Record<string, string>;
+                theme?: { color: string };
+                modal?: { ondismiss?: () => void };
+            }): {
+                open: () => void;
+                on: (event: 'payment.failed' | 'payment.success', callback: (response: { error?: { code: string; description: string; source: string; step: string; reason: string; metadata: { order_id: string; payment_id: string; }; }; success?: boolean; }) => void) => void;
+            };
+        };
+    }
 }
 
 export default PolicyForm;
