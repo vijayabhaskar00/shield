@@ -9,29 +9,33 @@ interface FaqItem {
 const FaqSection: React.FC = () => {
   const faqs: FaqItem[] = [
     {
+      question: "What's the difference between Student Shield and Student Shield Plus?",
+      answer: "Student Shield (₹999/year) includes Personal Accident Cover, Hospital Daily Cash, and MiCare wellness services - perfect for students aged 18-65. Student Shield Plus (₹1500/year) includes Term Life Cover and MiCare services, designed for ages 40-60 years providing family financial security."
+    },
+    {
       question: "How soon does coverage start?",
       answer: "Your coverage starts immediately after payment. There's no waiting period, so you're protected from the moment your payment is confirmed."
     },
     {
-      question: "What if I don't have receipts for a damaged phone?",
-      answer: "Don't stress. We've simplified our claims process. While photos of the damage are helpful, we don't require original purchase receipts for gadget claims."
+      question: "What is Term Life Cover in Student Shield Plus?",
+      answer: "Term Life Cover provides ₹3,00,000 death benefit for individuals aged 40-60 years. It's a 1-year policy that offers financial security to your family. Note: Suicide is excluded for the first year of the policy."
     },
     {
-      question: "Can I cancel my plan anytime?",
-      answer: "Yes, you can cancel your plan at any time. For monthly plans, you'll maintain coverage until the end of your billing cycle. For annual plans, we offer prorated refunds if you cancel early."
+      question: "Can I switch between plans?",
+      answer: "Yes, you can upgrade or change your plan during renewal. If you want to switch from Student Shield to Student Shield Plus or vice versa, contact our support team for assistance."
     },
     {
-      question: "Are pre-existing conditions covered?",
-      answer: "Student Shield covers new incidents and accidents that occur after your policy start date. Pre-existing medical conditions are generally not covered, but each case is evaluated individually."
+      question: "What are MiCare wellness services?",
+      answer: "MiCare is included in both plans and provides 60 free teleconsultations per year, second medical opinion, surgical assistance, and discounts up to 25% on pharmacy, 30% on diagnostics, 50% on dental care, and more."
+    },
+    {
+      question: "Are there any exclusions I should know about?",
+      answer: "Yes, Personal Accident cover excludes high-risk occupations like mining, explosives handling, racing, mountaineering, etc. Term Life Cover excludes suicide in the first year. Nuclear, chemical, and biological terrorism are also excluded."
     },
     {
       question: "How do I file a claim?",
-      answer: "Filing a claim is easy! Just log in to your account, click on 'File a Claim,' select the type of claim, provide the required information, and submit. Our team typically processes claims within 48-72 hours."
-    },
-    {
-      question: "Can I cover multiple devices?",
-      answer: "The Pro plan covers one primary device (phone or laptop). Additional devices can be added to your policy for a small extra fee. Contact our support team for details on multi-device coverage."
-    },
+      answer: "Filing a claim is easy! Log in to your account, select 'File a Claim,' choose the claim type, provide required information, and submit. Our team processes claims within 48-72 hours."
+    }
   ];
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -48,7 +52,7 @@ const FaqSection: React.FC = () => {
             Got Questions? <span className="text-indigo-600">We've Got Answers!</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Find answers to commonly asked questions about Student Shield coverage.
+            Find answers to commonly asked questions about both Student Shield plans.
           </p>
         </div>
 

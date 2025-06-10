@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, ShieldAlert, Smartphone } from 'lucide-react';
+import { Heart, ShieldAlert, Smartphone, Users } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 
@@ -39,11 +39,11 @@ const CoverageSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            Because when you're safe, your future stays steady. One decision. Total peace of mind.
+            Because when you're safe, your future stays steady. Choose from our comprehensive protection options.
           </motion.p>
         </div>
 
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Personal Accident Cover */}
           <motion.div 
             className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-2xl"
@@ -56,35 +56,27 @@ const CoverageSection: React.FC = () => {
               <div className="bg-white/20 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mb-4">
                 <ShieldAlert className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-white text-2xl font-bold">Personal Accident Cover</h3>
+              <h3 className="text-white text-xl font-bold">Personal Accident</h3>
               <p className="text-indigo-100 mt-2">₹10 Lakhs Coverage</p>
             </div>
             <div className="p-6">
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-3 mb-4">
                 <li className="flex items-start">
                   <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">Coverage for Accidental Death</span>
+                  <span className="text-gray-700 text-sm">Accidental Death Cover</span>
                 </li>
                 <li className="flex items-start">
                   <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">Permanent Total Disability (PTD)</span>
+                  <span className="text-gray-700 text-sm">Permanent Disability</span>
                 </li>
                 <li className="flex items-start">
                   <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">Permanent Partial Disability (PPD)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">Accidental Medical Reimbursement</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">Funeral Expenses</span>
+                  <span className="text-gray-700 text-sm">Medical Reimbursement</span>
                 </li>
               </ul>
-              <div className="bg-indigo-50 p-4 rounded-lg">
-                <p className="text-indigo-700 text-sm font-medium">
-                  "A serious accident shouldn't shake your education. Keep your family protected—and your goals intact."
+              <div className="bg-indigo-50 p-3 rounded-lg">
+                <p className="text-indigo-700 text-xs font-medium">
+                  Available in Student Shield plan
                 </p>
               </div>
             </div>
@@ -102,35 +94,65 @@ const CoverageSection: React.FC = () => {
               <div className="bg-white/20 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mb-4">
                 <Heart className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-white text-2xl font-bold">Hospital Daily Cash</h3>
+              <h3 className="text-white text-xl font-bold">Hospital Daily Cash</h3>
               <p className="text-teal-100 mt-2">Daily Benefits</p>
             </div>
             <div className="p-6">
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-3 mb-4">
                 <li className="flex items-start">
                   <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">₹2,000 per day benefit</span>
+                  <span className="text-gray-700 text-sm">₹2,000/day benefit</span>
                 </li>
                 <li className="flex items-start">
                   <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">ICU Coverage: ₹4,000 per day</span>
+                  <span className="text-gray-700 text-sm">₹4,000/day ICU</span>
                 </li>
                 <li className="flex items-start">
                   <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">COVID-19 Treatment Covered</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">No waiting period</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">Pre-existing conditions covered</span>
+                  <span className="text-gray-700 text-sm">No waiting period</span>
                 </li>
               </ul>
-              <div className="bg-teal-50 p-4 rounded-lg">
-                <p className="text-teal-700 text-sm font-medium">
-                  "Support your family through unexpected medical expenses—without disrupting your study plans."
+              <div className="bg-teal-50 p-3 rounded-lg">
+                <p className="text-teal-700 text-xs font-medium">
+                  Available in Student Shield plan
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Term Life Cover */}
+          <motion.div 
+            className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-2xl"
+            variants={cardVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            custom={2}
+          >
+            <div className="bg-gradient-to-r from-purple-500 to-purple-600 p-6">
+              <div className="bg-white/20 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                <Users className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-white text-xl font-bold">Term Life Cover</h3>
+              <p className="text-purple-100 mt-2">₹3 Lakhs Coverage</p>
+            </div>
+            <div className="p-6">
+              <ul className="space-y-3 mb-4">
+                <li className="flex items-start">
+                  <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
+                  <span className="text-gray-700 text-sm">Death Cover ₹3,00,000</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
+                  <span className="text-gray-700 text-sm">Age: 40-60 years</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
+                  <span className="text-gray-700 text-sm">Family protection</span>
+                </li>
+              </ul>
+              <div className="bg-purple-50 p-3 rounded-lg">
+                <p className="text-purple-700 text-xs font-medium">
+                  Available in Student Shield Plus
                 </p>
               </div>
             </div>
@@ -142,37 +164,33 @@ const CoverageSection: React.FC = () => {
             variants={cardVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
-            custom={2}
+            custom={3}
           >
             <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-6">
               <div className="bg-white/20 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mb-4">
                 <Smartphone className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-white text-2xl font-bold">Mi Care</h3>
+              <h3 className="text-white text-xl font-bold">Mi Care</h3>
               <p className="text-orange-100 mt-2">Wellness Services</p>
             </div>
             <div className="p-6">
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-3 mb-4">
                 <li className="flex items-start">
                   <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">60 Free Teleconsultations/Year</span>
+                  <span className="text-gray-700 text-sm">60 Free Teleconsultations</span>
                 </li>
                 <li className="flex items-start">
                   <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">Second Medical Opinion</span>
+                  <span className="text-gray-700 text-sm">Health discounts</span>
                 </li>
                 <li className="flex items-start">
                   <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">Surgical Assistance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-green-100 text-green-800 rounded-full p-1 mr-2 mt-1">✓</span>
-                  <span className="text-gray-700">Discounted Health Services</span>
+                  <span className="text-gray-700 text-sm">Surgical assistance</span>
                 </li>
               </ul>
-              <div className="bg-orange-50 p-4 rounded-lg">
-                <p className="text-orange-700 text-sm font-medium">
-                  "Complete healthcare access including pharmacy, diagnostics, radiology, dental, vision, and homecare."
+              <div className="bg-orange-50 p-3 rounded-lg">
+                <p className="text-orange-700 text-xs font-medium">
+                  Available in both plans
                 </p>
               </div>
             </div>
@@ -180,8 +198,10 @@ const CoverageSection: React.FC = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <div className="inline-block bg-red-600 text-white px-8 py-4 rounded-full text-xl font-bold animate-pulse">
-            All this for just ₹999/year
+          <div className="inline-flex items-center gap-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-bold">
+            <span>Student Shield: ₹999/year</span>
+            <span className="text-indigo-200">|</span>
+            <span>Student Shield Plus: ₹1500/year</span>
           </div>
         </div>
       </div>
