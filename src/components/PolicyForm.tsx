@@ -182,13 +182,13 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
           // Payment successful callback
           console.log('Payment Response:', response);
           
-          // Generate policy number
-          const policyNumber = `SS${Date.now().toString().slice(-8)}`;
+          // Generate customer reference with "ssst" prefix
+          const customerReference = `ssst${Date.now()}`;
           
           // Store payment data for thank you page
           setPaymentData({
             paymentId: response.razorpay_payment_id,
-            policyNumber: policyNumber,
+            customerReference: customerReference,
             amount: selectedPlanData.price,
             planName: selectedPlanData.name,
             timestamp: new Date().toLocaleString()
@@ -315,17 +315,15 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <motion.div
-  initial={{ opacity: 0, scale: 0.9 }}
-  animate={{ opacity: 1, scale: 1 }}
-  exit={{ opacity: 0, scale: 0.9 }}
-  className="bg-red-50 rounded-2xl shadow-2xl w-full max-w-4xl mx-4 max-h-[95vh] border border-red-100"
-  style={{ overflow: 'visible', minHeight: '600px' }}
->
-        
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          className="bg-red-50 rounded-2xl shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col border border-red-100"
+        >
           {/* Header */}
-          <div className="sticky top-0 bg-red-50 border-b border-red-200 px-6 py-4 rounded-t-2xl">
+          <div className="flex-shrink-0 bg-red-50 border-b border-red-200 px-6 py-4 rounded-t-2xl">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 {!paymentSuccess && step > 1 && (
@@ -365,7 +363,8 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
             )}
           </div>
 
-          <div className="p-6" style={{ overflow: 'visible', position: 'relative' }}>
+          {/* Scrollable Content Area */}
+          <div className="flex-1 overflow-y-auto p-6">
             {/* Thank You Page - Step 5 */}
             {paymentSuccess && (
               <motion.div
@@ -394,8 +393,8 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
                   <h4 className="font-semibold text-gray-800 mb-4 text-center">Payment & Policy Details</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                     <div>
-                      <span className="text-gray-600">Policy Number:</span>
-                      <div className="font-bold text-red-600">{paymentData?.policyNumber}</div>
+                      <span className="text-gray-600">Customer Reference:</span>
+                      <div className="font-bold text-red-600">{paymentData?.customerReference}</div>
                     </div>
                     <div>
                       <span className="text-gray-600">Payment ID:</span>
@@ -446,13 +445,6 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
                   <button
-                    onClick={downloadPolicy}
-                    className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
-                  >
-                    <Download className="h-4 w-4" />
-                    Download Policy
-                  </button>
-                  <button
                     onClick={handleClose}
                     className="flex-1 bg-white hover:bg-gray-50 text-red-600 py-3 px-6 rounded-lg font-semibold transition-colors border border-red-200"
                   >
@@ -490,7 +482,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
                 </div>
 
                 {/* Modern Plan Selector - FIXED DROPDOWN */}
-                <div className="relative" style={{ zIndex: 1000 }}>
+                <div className="relative">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Select Protection Plan *
                   </label>
@@ -530,11 +522,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
                           initial={{ opacity: 0, y: -10, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                          className="absolute top-full left-0 right-0 mt-2 bg-white border border-red-200 rounded-xl shadow-2xl overflow-hidden max-h-96 overflow-y-auto"
-                          style={{ 
-                            zIndex: 9999,
-                            position: 'absolute'
-                          }}
+                          className="absolute top-full left-0 right-0 mt-2 bg-white border border-red-200 rounded-xl shadow-2xl overflow-hidden max-h-96 overflow-y-auto z-50"
                         >
                           {Object.entries(plans).map(([key, plan]) => (
                             <button
@@ -996,10 +984,12 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
                 </div>
               </motion.div>
             )}
+          </div>
 
-            {/* Action Buttons - Only show if not payment success */}
-            {!paymentSuccess && (
-              <div className="flex gap-4 mt-8 pt-6 border-t border-red-200">
+          {/* Action Buttons - Fixed at bottom */}
+          {!paymentSuccess && (
+            <div className="flex-shrink-0 bg-red-50 border-t border-red-200 p-6">
+              <div className="flex gap-4">
                 {step < 4 ? (
                   <button
                     onClick={handleNext}
@@ -1018,8 +1008,8 @@ const PolicyForm: React.FC<PolicyFormProps> = ({ isOpen, onClose, selectedPlan }
                   </button>
                 )}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </motion.div>
       </div>
     </AnimatePresence>
