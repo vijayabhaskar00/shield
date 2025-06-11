@@ -233,16 +233,31 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
     try {
       const selectedPlanData = plans[formData.planType as keyof typeof plans];
       
+      // Create order on backend for auto-capture
+      const orderResponse = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/create-order`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: selectedPlanData.price * 100, currency: 'INR' }),
+        }
+      );
+      const orderData = await orderResponse.json();
+      if (!orderResponse.ok || !orderData.id) {
+        throw new Error('Order creation failed');
+      }
+      
       // Check if Razorpay is loaded
       if (!window.Razorpay) {
         throw new Error('Razorpay SDK not loaded');
       }
       
-      // Razorpay Configuration with Environment Variables
+      // Razorpay Configuration with Order ID for auto-capture
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Use environment variable
         amount: selectedPlanData.price * 100, // Amount in paise
         currency: 'INR',
+        order_id: orderData.id, // Use order created for capture
         name: 'Student Shield',
         description: `Payment for ${selectedPlanData.name}`,
         image: '/st.shield_logo-removebg-preview.png',
