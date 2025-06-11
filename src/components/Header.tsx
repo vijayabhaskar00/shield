@@ -26,7 +26,7 @@ const Header: React.FC = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'backdrop-blur-md bg-white/60 shadow-md py-2'
-          : 'backdrop-blur-md bg-white/30 py-4'
+          : 'backdrop-blur-md bg-white/50 py-4'
         }`}
         style={{
         borderBottom: isScrolled ? '1px solid rgba(255,255,255,0.2)' : 'none',
@@ -43,16 +43,16 @@ const Header: React.FC = () => {
         </div>
         {/* Desktop nav */}
         <nav className="hidden md:flex space-x-8">
-          <a href="#what-is" className={`font-medium hover:text-red-500 transition-colors ${isScrolled ? 'text-gray-700' : 'text-white'}`}>
+          <a href="#what-is" className={`font-medium hover:text-red-500 transition-colors ${isScrolled ? 'text-gray-800' : 'text-gray-800'}`}>
           About
           </a>
-          <a href="#coverage" className={`font-medium hover:text-red-500 transition-colors ${isScrolled ? 'text-gray-700' : 'text-white'}`}>
+          <a href="#coverage" className={`font-medium hover:text-red-500 transition-colors ${isScrolled ? 'text-gray-800' : 'text-gray-800'}`}>
           Coverage
           </a>
-          <a href="#pricing" className={`font-medium hover:text-red-500 transition-colors ${isScrolled ? 'text-gray-700' : 'text-white'}`}>
+          <a href="#pricing" className={`font-medium hover:text-red-500 transition-colors ${isScrolled ? 'text-gray-800' : 'text-gray-800'}`}>
           Pricing
           </a>
-          <a href="#faq" className={`font-medium hover:text-red-500 transition-colors ${isScrolled ? 'text-gray-700' : 'text-white'}`}>
+          <a href="#faq" className={`font-medium hover:text-red-500 transition-colors ${isScrolled ? 'text-gray-800' : 'text-gray-800'}`}>
           FAQ
           </a>
         </nav>

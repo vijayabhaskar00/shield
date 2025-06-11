@@ -58,10 +58,11 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
         nomineeDateOfBirth: "",
         planType: selectedPlan || "",
     });
-    const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+    const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>> & { terms?: string }>({});
     const [isLoading, setIsLoading] = useState(false);
     const [showPlanDropdown, setShowPlanDropdown] = useState(false);
     const [paymentSuccess, setPaymentSuccess] = useState(false);
+    const [termsAccepted, setTermsAccepted] = useState(false); // New state for terms and conditions
     interface PaymentData {
         paymentId: string;
         customerReference?: string;
@@ -229,6 +230,10 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
     };
 
   const handlePayment = async () => {
+    if (step === 4 && !termsAccepted) {
+      setErrors((prev) => ({ ...prev, terms: "You must accept the terms and conditions." }));
+      return;
+    }
     setIsLoading(true);
     try {
       const selectedPlanData = plans[formData.planType as keyof typeof plans];
@@ -414,6 +419,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
         setErrors({});
         setIsLoading(false);
         setShowPlanDropdown(false);
+        setTermsAccepted(false); // Reset terms accepted state
         onClose();
     };
 
@@ -1428,6 +1434,38 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
                     </div>
                   </div>
                 </div>
+
+                {/* Terms and Conditions */}
+                <div className="bg-white rounded-xl p-6 border border-red-200 mt-6">
+                  <div className="flex items-center">
+                    <input
+                      id="terms-checkbox"
+                      type="checkbox"
+                      checked={termsAccepted}
+                      onChange={(e) => {
+                        setTermsAccepted(e.target.checked);
+                        if (errors.terms) {
+                          setErrors((prev) => ({ ...prev, terms: "" }));
+                        }
+                      }}
+                      className="h-4 w-4 text-red-600 border-gray-300 rounded focus:ring-red-500"
+                    />
+                    <label htmlFor="terms-checkbox" className="ml-2 text-sm text-gray-700">
+                      I agree to the{' '}
+                      <a href="/terms-and-conditions" target="_blank" className="text-red-600 hover:underline">
+                        Terms and Conditions
+                      </a>{' '}
+                      and{' '}
+                      <a href="/privacy-policy" target="_blank" className="text-red-600 hover:underline">
+                        Privacy Policy
+                      </a>
+                      .
+                    </label>
+                  </div>
+                  {errors.terms && (
+                    <p className="text-red-500 text-xs mt-2">{errors.terms}</p>
+                  )}
+                </div>
               </motion.div>
             )}
           </div>
@@ -1447,7 +1485,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
                 ) : (
                   <button
                     onClick={handlePayment}
-                    disabled={isLoading}
+                    disabled={isLoading || (step === 4 && !termsAccepted)}
                     className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isLoading ? 'Processing...' : `Pay ₹${plans[formData.planType as keyof typeof plans]?.price}`}
