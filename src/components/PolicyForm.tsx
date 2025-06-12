@@ -10,6 +10,9 @@ import {
     Phone,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import DatePicker from 'react-datepicker';
+import { format } from 'date-fns';
+import 'react-datepicker/dist/react-datepicker.css';
 
 interface FormData {
     name: string;
@@ -77,7 +80,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
     const plans = {
         "student-shield": {
             name: "Student Shield",
-            price: 999,
+            price: 1,
             ageRange: "18-65 years",
             description: "Complete student protection package",
             features: [
@@ -339,12 +342,17 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
 
     const verifyPayment = async (paymentResponse: PaymentResponse) => {
         try {
-            // Prepare verification payload
+            const selectedPlanData = plans[formData.planType as keyof typeof plans];
+            
+            // Prepare verification payload with amount included
             const verificationData = {
                 razorpay_order_id: paymentResponse.razorpay_order_id,
                 razorpay_payment_id: paymentResponse.razorpay_payment_id,
                 razorpay_signature: paymentResponse.razorpay_signature,
-                user_data: formData,
+                user_data: {
+                    ...formData,
+                    amount: selectedPlanData.price // Add amount to user_data
+                },
             };
             // Call backend API
             const res = await fetch(
@@ -357,16 +365,14 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
             );
             const result = await res.json();
             if (result.success) {
-                const selectedPlanData =
-                    plans[formData.planType as keyof typeof plans];
                 // Update UI with backend policy number
-                setPaymentData({
-                    paymentId: paymentResponse.razorpay_payment_id,
+                setPaymentData(prev => ({
+                    ...prev!, // preserve customerReference
                     policyNumber: result.policyNumber,
                     amount: selectedPlanData.price,
                     planName: selectedPlanData.name,
                     timestamp: new Date().toLocaleString(),
-                });
+                }));
                 setPaymentSuccess(true);
             } else {
                 alert("Payment verification failed. Please contact support.");
@@ -434,7 +440,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
-          className="bg-red-50 rounded-2xl shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col border border-red-100"
+          className="bg-red-50 rounded-2xl shadow-2xl w-full max-w-4xl h-[90vh] overflow-hidden flex flex-col border border-red-100"
         >
           {/* Header */}
           <div className="flex-shrink-0 bg-red-50 border-b border-red-200 px-6 py-4 rounded-t-2xl">
@@ -916,20 +922,17 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
                                         <label className="block text-sm font-medium text-gray-700 mb-2">
                                             Date of Birth *
                                         </label>
-                                        <input
-                                            type="date"
-                                            value={formData.dateOfBirth}
-                                            onChange={(e) =>
-                                                handleInputChange(
-                                                    "dateOfBirth",
-                                                    e.target.value
-                                                )
-                                            }
-                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                                                errors.dateOfBirth
-                                                    ? "border-red-500"
-                                                    : "border-red-300"
-                                            }`}
+                                        <DatePicker
+                                            selected={formData.dateOfBirth ? new Date(formData.dateOfBirth) : null}
+                                            onChange={date => handleInputChange('dateOfBirth', date ? format(date, 'yyyy-MM-dd') : '')}
+                                            dateFormat="dd/MM/yyyy"
+                                            maxDate={new Date()}
+                                            showYearDropdown
+                                            scrollableYearDropdown
+                                            yearDropdownItemNumber={100}
+                                            showMonthDropdown
+                                            placeholderText="DD/MM/YYYY"
+                                            className={`w-full px-4 py-2 h-10 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${errors.dateOfBirth ? 'border-red-500' : 'border-red-300'}`}
                                         />
                                         {errors.dateOfBirth && (
                                             <p className="text-red-500 text-xs mt-1">
@@ -1226,20 +1229,17 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
                                         <label className="block text-sm font-medium text-gray-700 mb-2">
                                             Nominee Date of Birth *
                                         </label>
-                                        <input
-                                            type="date"
-                                            value={formData.nomineeDateOfBirth}
-                                            onChange={(e) =>
-                                                handleInputChange(
-                                                    "nomineeDateOfBirth",
-                                                    e.target.value
-                                                )
-                                            }
-                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${
-                                                errors.nomineeDateOfBirth
-                                                    ? "border-red-500"
-                                                    : "border-red-300"
-                                            }`}
+                                        <DatePicker
+                                            selected={formData.nomineeDateOfBirth ? new Date(formData.nomineeDateOfBirth) : null}
+                                            onChange={date => handleInputChange('nomineeDateOfBirth', date ? format(date, 'yyyy-MM-dd') : '')}
+                                            dateFormat="dd/MM/yyyy"
+                                            maxDate={new Date()}
+                                            showYearDropdown
+                                            scrollableYearDropdown
+                                            yearDropdownItemNumber={100}
+                                            showMonthDropdown
+                                            placeholderText="DD/MM/YYYY"
+                                            className={`w-full px-4 py-2 h-10 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white ${errors.nomineeDateOfBirth ? 'border-red-500' : 'border-red-300'}`}
                                         />
                                         {errors.nomineeDateOfBirth && (
                                             <p className="text-red-500 text-xs mt-1">
