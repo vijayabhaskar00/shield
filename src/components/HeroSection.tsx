@@ -17,7 +17,7 @@ const HeroSection: React.FC = () => {
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight drop-shadow-lg">
               <span className="block">🎓 India's 1<sup className="text-base align-super">st</sup> insurance plan</span>
-              <span className="block">designed <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent">just for students.</span></span>
+              <span className="block">designed <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent">Education Protection Plan for Students.</span></span>
               <span className="block mt-2 text-yellow-300 drop-shadow-lg">Student Shield got your back.</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl mb-8 text-red-100/90 font-medium max-w-2xl">
