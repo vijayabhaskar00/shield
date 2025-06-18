@@ -82,7 +82,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
             name: "Student Shield",
             price: 999,
             ageRange: "18-65 years",
-            description: "Complete student protection package",
+            description: "Education Protection Plan-Securing School to College Journey",
             features: [
                 "Personal Accident Cover (₹10 Lakhs)",
                 "Hospital Daily Cash",

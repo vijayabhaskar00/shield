@@ -16,9 +16,9 @@ const HeroSection: React.FC = () => {
               <span className="tracking-wide">Don't wait until it's too late!</span>
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight drop-shadow-lg">
-              <span className="block">🎓 India's 1<sup className="text-base align-super">st</sup> insurance plan</span>
-              <span className="block">designed <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent">Education Protection Plan for Students.</span></span>
-              <span className="block mt-2 text-yellow-300 drop-shadow-lg">Student Shield got your back.</span>
+              <span className="block">🎓 India's 1<sup className="text-base align-super">st</sup></span>
+              <span className="block"><span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent">Education Protection Plan for Students.</span></span>
+              {/* <span className="block mt-2 text-yellow-300 drop-shadow-lg">Student Shield got your back.</span> */}
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl mb-8 text-red-100/90 font-medium max-w-2xl">
               <span className="font-bold text-white">Choose your protection:</span>
@@ -78,16 +78,15 @@ const HeroSection: React.FC = () => {
                     <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-red-300" />
                   </div>
                   <div>
-                    <h3 className="text-white font-semibold text-sm sm:text-base">Complete Protection</h3>
-                    <p className="text-red-100 text-xs sm:text-sm">Two plans. Total peace of mind.</p>
+                    <h3 className="text-white font-semibold text-sm sm:text-base">Uninterrupted Education from KG to PG</h3>
+                    <p className="text-red-100 text-xs sm:text-sm">Two plans. One Mission.</p>
                   </div>
                 </div>
                 
                 {/* Info Card */}
                 <div className="bg-red-900/30 backdrop-blur-sm p-3 sm:p-4 rounded-lg">
                   <p className="text-xs sm:text-sm text-red-100">
-                    <span className="font-bold text-yellow-300">🔥 Did you know?</span> 78% of students face at least one emergency during their college years. Choose the right protection for your needs!
-                  </p>
+                    <span className="font-bold text-yellow-300">🔥 Did you know?</span> 78% of students face a major financial roadblock when a parent faces an emergency. Student Shield ensures your education journey continues -No matter what life throws at your family.                  </p>
                 </div>
               </div>
             </div>

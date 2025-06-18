@@ -31,7 +31,7 @@ const CoverageSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            Comprehensive Coverage <span className="text-indigo-600">for Every Student</span>
+            Comprehensive Coverage that <span className="text-indigo-600">Secures Education</span>
           </motion.h2>
           <motion.p 
             className="text-xl text-gray-600 max-w-3xl mx-auto"
@@ -39,7 +39,7 @@ const CoverageSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            Because when you're safe, your future stays steady. Choose from our comprehensive protection options.
+            Because when your parent is safe, your path stays steady.
           </motion.p>
         </div>
 

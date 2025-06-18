@@ -38,28 +38,31 @@ const PricingSection: React.FC = () => {
       period: 'year',
       popular: true,
       ageRange: '18-65 years',
-      description: 'Complete student protection package',
+      descriptions: [
+        "Education Protection Plan-Securing School to College Journey",
+        "Who's Covered: Income earning parent or guardian  (Ages 18–65 years)",
+        "Child's Age Range Supported: 3 to 21 years (KG to PG)"
+      ],
       features: [
         {
           title: 'Personal Accident Cover',
           value: '₹10 Lakhs',
           details: [
-            'Coverage for Accidental Death',
+            'Accidental Death',
             'Permanent Total Disability (PTD)',
             'Permanent Partial Disability (PPD)',
             'Accidental Medical Reimbursement (up to ₹10,000)',
-            'Funeral Expenses'
+            'Funeral Expenses Support'
           ]
         },
         {
           title: 'Hospital Daily Cash Benefit',
           value: 'Daily Benefits',
           details: [
-            'Coverage from Day 1 of hospitalization',
-            'Daily Cash Benefit: ₹2,000 per day (Max 30 days)',
-            'ICU Coverage: ₹4,000 per day (Max 30 days)',
-            'No waiting period, no deductibles',
-            'Pre-existing conditions covered from Day 1'
+            'Starts Day 1. No waiting period.',
+            '₹2,000 per day during hospitalization (Max 30 days)',
+            'ICU: ₹4,000 per day (Max 30 days)',
+            'Pre-existing conditions covered from Day 1',
           ]
         },
         {
@@ -82,17 +85,19 @@ const PricingSection: React.FC = () => {
       period: 'year',
       popular: false,
       ageRange: '40-60 years',
-      description: 'Enhanced protection with life coverage',
+      descriptions: [
+        'Enhanced Parent Protection with Life Cover',
+        'Whos Covered Income-earning parent (Ages 40–60 years)',
+        'Childs Age Range Supported: 3 to 21 years'
+      ],
       features: [
         {
           title: 'Term Life Cover',
           value: '₹3 Lakhs',
           details: [
-            'Death Cover: ₹3,00,000',
-            'Age Coverage: 40-60 years',
-            '1 Year Policy Tenure',
-            'Suicide exclusion for first year',
-            'Financial security for family'
+            '1-Year Term Life Cover',
+            'Financial support to continue the child’s education journey',
+            'Suicide exclusion for the first year',
           ]
         },
         {
@@ -141,7 +146,7 @@ const PricingSection: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              Smart Students Plan Ahead. Select the coverage that fits your needs and budget.
+              Smart Families Plan Ahead. Select a coverage that fits your needs and budget.
             </motion.p>
           </div>
 
@@ -173,7 +178,11 @@ const PricingSection: React.FC = () => {
                     ₹{plan.price}
                     <span className="text-lg font-normal">/{plan.period}</span>
                   </div>
-                  <p className="text-sm opacity-90 mb-2">{plan.description}</p>
+                  <ul className="text-sm opacity-90 mb-2 list-disc list-inside">
+                    {plan.descriptions.map((desc, idx) => (
+                      <li key={idx}>{desc}</li>
+                    ))}
+                  </ul>
                   <p className="text-xs opacity-75">Age: {plan.ageRange}</p>
                 </div>
 
@@ -221,7 +230,7 @@ const PricingSection: React.FC = () => {
                       Get {plan.name}
                     </button>
                     <p className="mt-3 text-gray-500 text-sm">
-                      {plan.popular ? 'Comprehensive protection for students' : 'Enhanced coverage with life insurance'}
+                      {plan.popular ? 'Your child’s dreams should never suffer due to an unexpected emergency. With Student Shield, they won’t.' : 'A parent’s well-being is a child’s strongest foundation. Student Shield Plus ensures both are secure.'}
                     </p>
                   </div>
                 </div>
@@ -237,7 +246,7 @@ const PricingSection: React.FC = () => {
             custom={2}
           >
             <p className="text-indigo-800 font-medium text-lg">
-              🛡️ Join thousands of students already protecting their future with Student Shield
+              🛡️ Join thousands of families who’ve protected their child’s education with Student Shield.
             </p>
             <p className="text-indigo-600 text-sm mt-2">
               Both plans include MiCare wellness services for complete healthcare support

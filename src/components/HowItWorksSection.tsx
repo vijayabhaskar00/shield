@@ -6,25 +6,25 @@ const HowItWorksSection: React.FC = () => {
     {
       icon: <Shield className="h-8 w-8 text-white" />,
       title: 'Choose Your Plan',
-      description: 'Select from our Basic, Smart, or Pro options to match your needs and budget.',
+      description: 'Select Shield or Shield Plus based on your familys needs.',
       color: 'bg-indigo-600'
     },
     {
       icon: <FileText className="h-8 w-8 text-white" />,
-      title: 'Enter Your Info',
-      description: 'Fill in some basic details so we can create your personalized coverage.',
+      title: '2.	Enter Parents Details',
+      description: 'We’ll ask for the insured parent’s information and child’s details.',
       color: 'bg-teal-600'
     },
     {
       icon: <CreditCard className="h-8 w-8 text-white" />,
       title: 'Make Payment',
-      description: 'We accept UPI, cards, and wallets for your convenience.',
+      description: 'Use UPI, cards, or wallets.',
       color: 'bg-orange-600'
     },
     {
       icon: <Check className="h-8 w-8 text-white" />,
       title: 'Boom! You\'re Covered',
-      description: 'Get instant confirmation and access to your coverage details.',
+      description: 'Instant policy confirmation and email notification.',
       color: 'bg-green-600'
     }
   ];
@@ -37,7 +37,7 @@ const HowItWorksSection: React.FC = () => {
             How It Works: <span className="text-indigo-600">Simple as 1-2-3!</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Getting covered is quick, easy, and straightforward. Follow these steps to secure your plan:
+            Getting covered is easy.
           </p>
         </div>
 
@@ -99,7 +99,7 @@ const HowItWorksSection: React.FC = () => {
           <div className="bg-white rounded-xl p-8 shadow-lg max-w-3xl mx-auto border border-gray-200 hover:shadow-xl transition-shadow">
             <h3 className="text-2xl font-bold text-gray-800 mb-4">It's That Simple</h3>
             <p className="text-gray-600 mb-6">
-              From selection to coverage in less than 5 minutes. No paperwork, no waiting periods.
+             From sign-up to coverage in under 5 minutes. Zero paperwork. Immediate protection.
             </p>
             <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition-colors">
               Get Started Now
