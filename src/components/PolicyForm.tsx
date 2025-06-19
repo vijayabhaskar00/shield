@@ -66,6 +66,9 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
     const [showPlanDropdown, setShowPlanDropdown] = useState(false);
     const [paymentSuccess, setPaymentSuccess] = useState(false);
     const [termsAccepted, setTermsAccepted] = useState(false); // New state for terms and conditions
+    const [paymentError, setPaymentError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
     interface PaymentData {
         paymentId: string;
         customerReference?: string;
@@ -247,7 +250,8 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ amount: selectedPlanData.price * 100, currency: 'INR' }),
+          // send only planType; backend derives the price
+          body: JSON.stringify({ planType: formData.planType }),
         }
       );
       const orderData = await orderResponse.json();
@@ -375,12 +379,16 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
                 }));
                 setPaymentSuccess(true);
             } else {
-                alert("Payment verification failed. Please contact support.");
-                console.error("Backend verification error:", result.message);
+                // Set error state instead of alert
+                setErrorMessage(result.message || 'Policy processing failed: Trusted payment not received.');
+                setPaymentError(true);
+                setIsLoading(false);
+                return;
             }
         } catch (error) {
-            console.error("Payment verification failed:", error);
-            alert("Payment verification failed. Please try again later.");
+            console.error('Payment verification error:', error);
+            setErrorMessage('Payment verification failed. Please try again later.');
+            setPaymentError(true);
         } finally {
             setIsLoading(false);
         }
@@ -1493,6 +1501,68 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
                 )}
               </div>
             </div>
+          )}
+
+          {/* Error Popup - Payment Failed */}
+          {paymentError && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="fixed inset-0 z-60 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+            >
+              <div className="bg-white rounded-xl shadow-lg w-full max-w-md p-6 text-center">
+                <div className="mx-auto w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                  <X className="h-12 w-12 text-red-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                  Policy Processing Failed
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  {errorMessage}
+                </p>
+
+                {/* Details Card for failed payment */}
+                <div className="bg-white rounded-xl p-4 border border-red-200 text-left mb-4">
+                  <h4 className="font-semibold text-red-800 mb-3 text-center">Payment & User Details</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                    <div>
+                      <span className="text-gray-600">Customer Reference:</span>
+                      <div className="font-bold text-red-600">{paymentData?.customerReference || 'N/A'}</div>
+                    </div>
+                    <div>
+                      <span className="text-gray-600">Payment ID:</span>
+                      <div className="font-medium">{paymentData?.paymentId || 'N/A'}</div>
+                    </div>
+                    <div>
+                      <span className="text-gray-600">Plan:</span>
+                      <div className="font-medium">{paymentData?.planName || formData.planType || 'N/A'}</div>
+                    </div>
+                    <div>
+                      <span className="text-gray-600">Amount Attempted:</span>
+                      <div className="font-bold text-red-600">₹{paymentData?.amount || '0'}</div>
+                    </div>
+                    <div>
+                      <span className="text-gray-600">Customer Name:</span>
+                      <div className="font-medium">{formData.name || 'N/A'}</div>
+                    </div>
+                    <div>
+                      <span className="text-gray-600">Date & Time:</span>
+                      <div className="font-medium">{paymentData?.timestamp || new Date().toLocaleString()}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button
+                    onClick={handleClose}
+                    className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           )}
         </motion.div>
       </div>
