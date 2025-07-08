@@ -2,7 +2,11 @@ import React from 'react';
 import { Phone, ArrowRight,Shield } from 'lucide-react';
 import Iridescence from './Iridescence';
 
-const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  openPolicyForm: () => void;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ openPolicyForm }) => {
   return (
     <section className="min-h-screen pt-20 relative overflow-hidden bg-gradient-to-br from-red-700 via-red-600 to-rose-500">
       <Iridescence color={[1, 0.2, 0.2]} mouseReact={false} amplitude={0.15} speed={0.5} />
@@ -30,7 +34,10 @@ const HeroSection: React.FC = () => {
             
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <button className="bg-white text-red-700 px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-lg hover:bg-yellow-300 transition-all duration-300 font-bold text-base sm:text-lg flex items-center justify-center group">
+              <button
+                className="bg-white text-red-700 px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-lg hover:bg-yellow-300 transition-all duration-300 font-bold text-base sm:text-lg flex items-center justify-center group"
+                onClick={openPolicyForm}
+              >
                 🔒 Get Protected Now
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </button>

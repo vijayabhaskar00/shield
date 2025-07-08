@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import PolicyForm from './PolicyForm'; // Changed from PaymentPage to PolicyForm
 
-const Header: React.FC = () => {
+
+
+interface HeaderProps {
+  openPolicyForm: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ openPolicyForm }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [showPolicyForm, setShowPolicyForm] = useState(false); // Changed variable name
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,7 +20,7 @@ const Header: React.FC = () => {
   }, []);
 
   const handleGetCovered = () => {
-    setShowPolicyForm(true); // Changed variable name
+    openPolicyForm();
     setMobileOpen(false);
   };
 
@@ -157,11 +161,7 @@ const Header: React.FC = () => {
         )}
       </header>
 
-      {/* Policy Form Modal - Half Screen */}
-      <PolicyForm 
-        isOpen={showPolicyForm} 
-        onClose={() => setShowPolicyForm(false)} 
-      />
+      {/* Policy Form Modal handled by parent */}
     </>
   );
 };
