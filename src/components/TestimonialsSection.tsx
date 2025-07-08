@@ -7,19 +7,19 @@ const TestimonialsSection: React.FC = () => {
       name: "Rani Sharma",
       position: "2nd Year, University of Hyderabad",
       image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-      quote: "I accidentally broke my phone during a college event, and Student Shield covered the repair costs. Worth every penny!",
+      quote: "My Father was diagnosed with Dengue for a Month, where our health expenses are covered through Insurance",
     },
     {
       name: "Arjun Patel",
       position: "3rd Year, IIT Bombay",
       image: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg",
-      quote: "Got food poisoning during exam week. Student Shield covered my hospital visit and medications, and their support team helped me through the entire process.",
+      quote: "Suddenly my father had cardiac arrest and there was a immedaite suregery, we were covered through student shield insurance. ",
     },
     {
-      name: "Priya Verma",
-      position: "1st Year, Delhi University",
+      name: "Lakshmi Priya",
+      position: "2nd Year, Malla Reddy University",
       image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg",
-      quote: "My laptop got damaged when someone spilled coffee on it in the library. Student Shield helped cover part of the repair cost which was such a relief!",
+      quote: "My mother met with an accident and had to undergo surgery. Student Shield covered all the medical expenses, and I didn't have to worry about finances during such a tough time.",
     },
   ];
 

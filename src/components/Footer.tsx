@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
           
-          <div>
+          {/* <div>
             <h3 className="font-semibold text-white text-lg mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
@@ -39,14 +39,14 @@ const Footer: React.FC = () => {
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">Careers</a>
               </li>
-              <li>
+               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">Blog</a>
-              </li>
-              <li>
+              </li> 
+               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">Press</a>
-              </li>
+              </li> 
             </ul>
-          </div>
+          </div> */}
           
           <div>
             <h3 className="font-semibold text-white text-lg mb-4">Resources</h3>
@@ -83,7 +83,7 @@ const Footer: React.FC = () => {
         
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
           <p>© {new Date().getFullYear()} Student Shield. All rights reserved.</p>
-          <p className="mt-2">Licensed by IRDAI. Insurance Partner: Secure Insurance Co. Ltd.</p>
+          <p className="mt-2">Licensed by IRDAI. Insurance Partner: MicroNsure.</p>
         </div>
       </div>
     </footer>

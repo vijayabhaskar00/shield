@@ -21,7 +21,7 @@ const HeroSection: React.FC = () => {
               {/* <span className="block mt-2 text-yellow-300 drop-shadow-lg">Student Shield got your back.</span> */}
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl mb-8 text-red-100/90 font-medium max-w-2xl">
-              <span className="font-bold text-white">Choose your protection:</span>
+              <span className="font-bold text-white">Exclusive for Student Tribe Only</span>
               <br className="hidden sm:block" />
               <span className="text-yellow-100">Student Shield</span> from <span className="font-bold text-yellow-200">₹999/year</span>
               <br className="hidden sm:block" />

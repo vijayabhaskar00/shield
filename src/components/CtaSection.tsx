@@ -13,17 +13,17 @@ const CtaSection: React.FC = () => {
           </div>
           
           <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-            Protect Your Future Self Today!
+            Ready to Secure Your Child’s Education?
           </h2>
           
           <p className="text-xl mb-8 text-indigo-100 max-w-2xl mx-auto">
-            Join hundreds of students already securing their health, gadgets, and future with Student Shield.
+            Select your plan. Complete payment. Click to Protect at a blink!
           </p>
           
           <div className="relative inline-block">
-            <div className="absolute -top-10 -right-10 bg-yellow-400 text-indigo-900 text-xs font-bold px-3 py-1 rounded-full animate-pulse">
+            {/* <div className="absolute -top-10 -right-10 bg-yellow-400 text-indigo-900 text-xs font-bold px-3 py-1 rounded-full animate-pulse">
               Limited Time Offer!
-            </div>
+            </div> */}
             <button className="bg-white text-indigo-700 px-8 py-4 rounded-lg shadow-lg hover:bg-yellow-300 transition-all duration-300 font-bold text-lg flex items-center justify-center mx-auto group">
               🛡️ Get My Plan Now
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

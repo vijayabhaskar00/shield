@@ -146,7 +146,7 @@ const PricingSection: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              Smart Families Plan Ahead. Select a coverage that fits your needs and budget.
+              Smart Families Plan Ahead. Select a coverage that fits your Parent needs and budget.
             </motion.p>
           </div>
 

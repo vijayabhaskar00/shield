@@ -18,9 +18,9 @@ const WhyNeedSection: React.FC = () => {
       id: 2,
       icon: <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-white" />,
       title: "1 in 3",
-      subtitle: "students damage their phone within the first year",
+      subtitle: "Parents face unexpected expenses",
       warningType: "FACT:",
-      warningText: "Your phone is essential for classes and emergencies. Can you afford a replacement?",
+      warningText: "We cover your parent, so you can focus on your studies, not finances.",
       bgGradient: "from-orange-900/40 to-red-800/40"
     },
     {
@@ -32,16 +32,7 @@ const WhyNeedSection: React.FC = () => {
       warningText: "Join thousands of protected students from just ₹199/month.",
       bgGradient: "from-purple-900/40 to-red-800/40"
     },
-    {
-      id: 4,
-      icon: <Quote className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-white" />,
-      title: "Real Student",
-      subtitle: "success story",
-      testimonialText: "I fell sick during my final exams and didn't have money for hospital bills. Student Shield covered everything, and I could focus on getting better instead of worrying about costs.",
-      author: "- Priya S., 2nd Year, Delhi University",
-      bgGradient: "from-green-900/40 to-red-800/40",
-      isTestimonial: true
-    }
+    
   ];
 
   // Auto-advance carousel
@@ -72,7 +63,7 @@ const WhyNeedSection: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <div className="inline-block bg-red-900/30 backdrop-blur-sm px-4 py-2 sm:px-6 sm:py-2 rounded-full text-yellow-300 font-semibold mb-4 sm:mb-6 animate-pulse text-sm sm:text-base">
-            🚨 Reality Check: Are You Protected?
+            🚨 Reality Check: Is your Parent Protected?
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 px-4">
             What if something goes wrong tomorrow?

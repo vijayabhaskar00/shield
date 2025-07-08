@@ -9,24 +9,24 @@ interface FaqItem {
 const FaqSection: React.FC = () => {
   const faqs: FaqItem[] = [
     {
+      question: "Who is covered under the plans?",
+      answer: "The earning parent or guardian is covered. If they face an emergency or pass away, the child’s education is protected financially."
+    },
+    {
       question: "What's the difference between Student Shield and Student Shield Plus?",
-      answer: "Student Shield (₹999/year) includes Personal Accident Cover, Hospital Daily Cash, and MiCare wellness services - perfect for students aged 18-65. Student Shield Plus (₹1500/year) includes Term Life Cover and MiCare services, designed for ages 40-60 years providing family financial security."
+      answer: "•	Student Shield (₹999/year): Covers accidental events (hospitalization, death, disability). •	Student Shield Plus (₹1500/year): Adds life cover (death by any cause) to the existing benefits."
     },
     {
       question: "How soon does coverage start?",
       answer: "Your coverage starts immediately after payment. There's no waiting period, so you're protected from the moment your payment is confirmed."
     },
     {
-      question: "What is Term Life Cover in Student Shield Plus?",
-      answer: "Term Life Cover provides ₹3,00,000 death benefit for individuals aged 40-60 years. It's a 1-year policy that offers financial security to your family. Note: Suicide is excluded for the first year of the policy."
+      question: "Is the student directly insured?",
+      answer: "No. The parent is insured. The objective is to secure the student’s education in case of unforeseen events affecting the parent."
     },
     {
       question: "Can I switch between plans?",
       answer: "Yes, you can upgrade or change your plan during renewal. If you want to switch from Student Shield to Student Shield Plus or vice versa, contact our support team for assistance."
-    },
-    {
-      question: "What are MiCare wellness services?",
-      answer: "MiCare is included in both plans and provides 60 free teleconsultations per year, second medical opinion, surgical assistance, and discounts up to 25% on pharmacy, 30% on diagnostics, 50% on dental care, and more."
     },
     {
       question: "Are there any exclusions I should know about?",
@@ -34,7 +34,7 @@ const FaqSection: React.FC = () => {
     },
     {
       question: "How do I file a claim?",
-      answer: "Filing a claim is easy! Log in to your account, select 'File a Claim,' choose the claim type, provide required information, and submit. Our team processes claims within 48-72 hours."
+      answer: "Filing a claim is easy! Log in to your account [MicroNsure], select 'File a Claim,' choose the claim type, provide required information, and submit. Our team processes claims within 48-72 hours."
     }
   ];
 
