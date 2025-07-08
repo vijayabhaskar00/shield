@@ -24,7 +24,7 @@ const CtaSection: React.FC = () => {
             {/* <div className="absolute -top-10 -right-10 bg-yellow-400 text-indigo-900 text-xs font-bold px-3 py-1 rounded-full animate-pulse">
               Limited Time Offer!
             </div> */}
-            <button className="bg-white text-indigo-700 px-8 py-4 rounded-lg shadow-lg hover:bg-yellow-300 transition-all duration-300 font-bold text-lg flex items-center justify-center mx-auto group">
+            <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="bg-white text-indigo-700 px-8 py-4 rounded-lg shadow-lg hover:bg-yellow-300 transition-all duration-300 font-bold text-lg flex items-center justify-center mx-auto group">
               🛡️ Get My Plan Now
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </button>

@@ -41,7 +41,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ openPolicyForm }) => {
                 🔒 Get Protected Now
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="bg-transparent border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-white hover:text-red-700 transition-all duration-300 font-bold text-base sm:text-lg">
+              <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="bg-transparent border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-white hover:text-red-700 transition-all duration-300 font-bold text-base sm:text-lg">
                 ✨ Compare Plans
               </button>
             </div>

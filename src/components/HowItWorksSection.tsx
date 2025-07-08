@@ -101,7 +101,7 @@ const HowItWorksSection: React.FC = () => {
             <p className="text-gray-600 mb-6">
              From sign-up to coverage in under 5 minutes. Zero paperwork. Immediate protection.
             </p>
-            <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+            <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition-colors">
               Get Started Now
             </button>
           </div>
