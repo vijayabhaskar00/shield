@@ -43,7 +43,8 @@ const CoverageSection: React.FC = () => {
           </motion.p>
         </div>
 
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="flex justify-center">
+          <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full">
           {/* Personal Accident Cover */}
           <motion.div 
             className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-2xl"
@@ -157,9 +158,10 @@ const CoverageSection: React.FC = () => {
               </div>
             </div>
           </motion.div>
+        </div>
 
           {/* Mi Care Wellness Services */}
-          <motion.div 
+          {/* <motion.div 
             className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-2xl"
             variants={cardVariants}
             initial="hidden"
@@ -194,7 +196,7 @@ const CoverageSection: React.FC = () => {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
         </div>
 
         <div className="mt-12 text-center">

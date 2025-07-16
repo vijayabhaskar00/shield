@@ -89,7 +89,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
             features: [
                 "Personal Accident Cover (₹10 Lakhs)",
                 "Hospital Daily Cash",
-                "MiCare Wellness",
+                "Wellness Care",
             ],
             color: "red",
             gradient: "from-red-600 to-red-700",
@@ -101,7 +101,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
             description: "Enhanced protection with life coverage",
             features: [
                 "Term Life Cover (₹3 Lakhs)",
-                "MiCare Wellness",
+                "Wellness Care",
                 "Premium Services",
             ],
             color: "red",
@@ -658,7 +658,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
                               {plans[formData.planType as keyof typeof plans].name}
                             </div>
                             <div className="text-sm text-gray-600">
-                              ₹{plans[formData.planType as keyof typeof plans].price}/year • Age: {plans[formData.planType as keyof typeof plans].ageRange}
+                              ₹{plans[formData.planType as keyof typeof plans].price}/year • Parent Age: {plans[formData.planType as keyof typeof plans].ageRange}
                             </div>
                           </div>
                           <ChevronDown className={`h-5 w-5 text-gray-400 transition-transform ${showPlanDropdown ? 'rotate-180' : ''}`} />
@@ -698,7 +698,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
                                   <div>
                                     <h4 className="font-semibold text-gray-800">{plan.name}</h4>
                                     <p className="text-sm text-gray-600 mb-1">{plan.description}</p>
-                                    <p className="text-xs text-gray-500">Age: {plan.ageRange}</p>
+                                    <p className="text-xs text-gray-500">Parent Age: {plan.ageRange}</p>
                                   </div>
                                 </div>
                                 <div className="text-right">
@@ -763,7 +763,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
                                             }
                                         </p>
                                         <p className="text-xs opacity-75">
-                                            Age:{" "}
+                                            Parent Age:{" "}
                                             {
                                                 plans[
                                                     formData.planType as keyof typeof plans
@@ -825,7 +825,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
                                                     ? "border-red-500"
                                                     : "border-red-300"
                                             }`}
-                                            placeholder="Enter your full name"
+                                            placeholder="Enter your Parent Full Name"
                                         />
                                         {errors.name && (
                                             <p className="text-red-500 text-xs mt-1">
@@ -1328,7 +1328,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
                                         }
                                     </p>
                                     <p className="text-xs opacity-75 mb-4">
-                                        Age:{" "}
+                                        Parent Age:{" "}
                                         {
                                             plans[
                                                 formData.planType as keyof typeof plans

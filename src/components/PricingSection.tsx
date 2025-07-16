@@ -39,41 +39,80 @@ const PricingSection: React.FC = () => {
       popular: true,
       ageRange: '18-65 years',
       descriptions: [
-        "Education Protection Plan-Securing School to College Journey",
-        "Who's Covered: Income earning parent or guardian  (Ages 18–65 years)",
-        "Child's Age Range Supported: 3 to 21 years (KG to PG)"
+        "Covers income loss due to Accidental Hospitalisation, Disability, Accidental Death, Dismemberment, Daily cash in case of Hospitalisation and Funeral expenses.",
+        "Wellness Cover"
       ],
       features: [
         {
-          title: 'Personal Accident Cover',
-          value: '₹10 Lakhs',
+          title: 'Wellness Cover',
+          value: '',
           details: [
-            'Accidental Death',
-            'Permanent Total Disability (PTD)',
-            'Permanent Partial Disability (PPD)',
-            'Accidental Medical Reimbursement (up to ₹10,000)',
-            'Funeral Expenses Support'
+            '60 free consultations',
+            'Second opinion',
+            'Surgery care assistance (free pickup and drop at the Hospital)',
+            'Dedicated Care Co-ordinator',
+            'Additional discounts:',
+            'upto 25% on pharmacy',
+            'upto 30% on Diagnostics',
+            'upto 10% on Home-care',
+            'upto 50% discount on dental scaling and X-ray',
+            'upto 50% discount on Frames and lenses'
           ]
         },
         {
-          title: 'Hospital Daily Cash Benefit',
-          value: 'Daily Benefits',
+          title: 'Hospital Daily Cash',
+          value: '',
           details: [
-            'Starts Day 1. No waiting period.',
-            '₹2,000 per day during hospitalization (Max 30 days)',
-            'ICU: ₹4,000 per day (Max 30 days)',
-            'Pre-existing conditions covered from Day 1',
+            '2000 Rs per day and ICU double benefit 4000 Rs per day for a max of 30 days'
           ]
         },
         {
-          title: 'Mi Care Wellness Services',
-          value: 'Complete Care',
+          title: 'Accidental Hospitalisation (linked to Death and Disability)',
+          value: '',
           details: [
-            '60 Free Teleconsultations/Year',
-            'Second Medical Opinion',
-            'Surgical Assistance',
-            'Up to 25% discount on Pharmacy',
-            'Up to 30% discount on Diagnostics'
+            '10,000 Rs'
+          ]
+        },
+        {
+          title: 'Accidental Death',
+          value: '',
+          details: [
+            '10,00,000 Rs'
+          ]
+        },
+        {
+          title: 'Accidental Disability',
+          value: '',
+          details: [
+            'Upto 100% of Accidental Death based on type of Disability'
+          ]
+        },
+        {
+          title: 'Accidental Dismemberment',
+          value: '',
+          details: [
+            'Upto 100% of Accidental Death based on type of Dismemberment'
+          ]
+        },
+        {
+          title: 'Funeral Expenses',
+          value: '',
+          details: [
+            '10000 Rs'
+          ]
+        },
+        {
+          title: 'Death By all Means',
+          value: '',
+          details: [
+            'Not Applicable'
+          ]
+        },
+        {
+          title: 'Premium per year (including gst)',
+          value: '',
+          details: [
+            'Rs 999 per year'
           ]
         }
       ]
@@ -86,41 +125,80 @@ const PricingSection: React.FC = () => {
       popular: false,
       ageRange: '40-60 years',
       descriptions: [
-        'Enhanced Parent Protection with Life Cover',
-        'Whos Covered Income-earning parent (Ages 40–60 years)',
-        'Childs Age Range Supported: 3 to 21 years'
+        'Covers income loss due to Accidental Hospitalisation, Disability, Accidental Death, Dismemberment, Daily cash in case of Hospitalisation and Funeral expenses.',
+        'Wellness cover and also covers income loss due to Death by any means.'
       ],
       features: [
         {
-          title: 'Term Life Cover',
-          value: '₹3 Lakhs',
+          title: 'Wellness Cover',
+          value: '',
           details: [
-            '1-Year Term Life Cover',
-            'Financial support to continue the child’s education journey',
-            'Suicide exclusion for the first year',
+            '60 free consultations',
+            'Second opinion',
+            'Surgery care assistance (free pickup and drop at the Hospital)',
+            'Dedicate Care Co-ordinator',
+            'Additional discounts:',
+            'up to 25% on pharmacy',
+            'upto 30% on Diagnostics',
+            'upto 10% on Home-care',
+            'upto 50% discount on dental scaling and X-ray',
+            'upto 50% discount on Frames and lenses'
           ]
         },
         {
-          title: 'Mi Care Wellness Services',
-          value: 'Complete Care',
+          title: 'Hospital Daily Cash',
+          value: '',
           details: [
-            '60 Free Teleconsultations/Year',
-            'Second Medical Opinion',
-            'Surgical Assistance & Care Coordination',
-            'Up to 25% discount on Pharmacy',
-            'Up to 30% discount on Diagnostics',
-            'Up to 50% discount on dental & vision care'
+            '2000 Rs per day and ICU double benefit 4000 Rs per day for a max of 30 days'
           ]
         },
         {
-          title: 'Additional Benefits',
-          value: 'Premium Services',
+          title: 'Accidental Hospitalisation (linked to Death and Disability)',
+          value: '',
           details: [
-            'Free pick-up and drop at hospital',
-            'Dedicated care coordinator',
-            'Up to 10% discount on Homecare',
-            'Enhanced wellness support',
-            'Priority customer service'
+            '10,000 Rs'
+          ]
+        },
+        {
+          title: 'Accidental Death',
+          value: '',
+          details: [
+            '13,00,000 Rs'
+          ]
+        },
+        {
+          title: 'Accidental Disability',
+          value: '',
+          details: [
+            'Upto 100% of Accidental Death based on type of Disability'
+          ]
+        },
+        {
+          title: 'Accidental Dismemberment',
+          value: '',
+          details: [
+            'Upto 100% of Accidental Death based on type of Dismemberment'
+          ]
+        },
+        {
+          title: 'Funeral Expenses',
+          value: '',
+          details: [
+            '10000 Rs'
+          ]
+        },
+        {
+          title: 'Death By all Means',
+          value: '',
+          details: [
+            '3,00,000'
+          ]
+        },
+        {
+          title: 'Premium per year (including gst)',
+          value: '',
+          details: [
+            'Rs 1500 per year'
           ]
         }
       ]
@@ -183,7 +261,7 @@ const PricingSection: React.FC = () => {
                       <li key={idx}>{desc}</li>
                     ))}
                   </ul>
-                  <p className="text-xs opacity-75">Age: {plan.ageRange}</p>
+                  <p className="text-xs opacity-75">Parent Age: {plan.ageRange}</p>
                 </div>
 
                 <div className="p-6">
@@ -195,9 +273,21 @@ const PricingSection: React.FC = () => {
                             {index === 0 && plan.name === 'Student Shield' && <ShieldAlert className="h-6 w-6 text-indigo-600" />}
                             {index === 1 && plan.name === 'Student Shield' && <Heart className="h-6 w-6 text-indigo-600" />}
                             {index === 2 && plan.name === 'Student Shield' && <Smartphone className="h-6 w-6 text-indigo-600" />}
-                            {index === 0 && plan.name === 'Student Shield Plus' && <Users className="h-6 w-6 text-purple-600" />}
-                            {index === 1 && plan.name === 'Student Shield Plus' && <Smartphone className="h-6 w-6 text-purple-600" />}
-                            {index === 2 && plan.name === 'Student Shield Plus' && <Heart className="h-6 w-6 text-purple-600" />}
+                            {index === 3 && plan.name === 'Student Shield' && <ShieldAlert className="h-6 w-6 text-indigo-600" />} {/* Accidental Death */}
+                            {index === 4 && plan.name === 'Student Shield' && <ShieldAlert className="h-6 w-6 text-indigo-600" />} {/* Accidental Disability */}
+                            {index === 5 && plan.name === 'Student Shield' && <ShieldAlert className="h-6 w-6 text-indigo-600" />} {/* Accidental Dismemberment */}
+                            {index === 6 && plan.name === 'Student Shield' && <Heart className="h-6 w-6 text-indigo-600" />} {/* Funeral Expenses */}
+                            {index === 7 && plan.name === 'Student Shield' && <ShieldAlert className="h-6 w-6 text-indigo-600" />} {/* Death By all Means */}
+                            {index === 8 && plan.name === 'Student Shield' && <CheckCircle className="h-6 w-6 text-indigo-600" />} {/* Premium per year */}
+                            {index === 0 && plan.name === 'Student Shield Plus' && <ShieldAlert className="h-6 w-6 text-purple-600" />} {/* Wellness Cover */}
+                            {index === 1 && plan.name === 'Student Shield Plus' && <Heart className="h-6 w-6 text-purple-600" />} {/* Hospital Daily Cash */}
+                            {index === 2 && plan.name === 'Student Shield Plus' && <Smartphone className="h-6 w-6 text-purple-600" />} {/* Accidental Hospitalisation */}
+                            {index === 3 && plan.name === 'Student Shield Plus' && <ShieldAlert className="h-6 w-6 text-purple-600" />} {/* Accidental Death */}
+                            {index === 4 && plan.name === 'Student Shield Plus' && <ShieldAlert className="h-6 w-6 text-purple-600" />} {/* Accidental Disability */}
+                            {index === 5 && plan.name === 'Student Shield Plus' && <ShieldAlert className="h-6 w-6 text-purple-600" />} {/* Accidental Dismemberment */}
+                            {index === 6 && plan.name === 'Student Shield Plus' && <Heart className="h-6 w-6 text-purple-600" />} {/* Funeral Expenses */}
+                            {index === 7 && plan.name === 'Student Shield Plus' && <ShieldAlert className="h-6 w-6 text-purple-600" />} {/* Death By all Means */}
+                            {index === 8 && plan.name === 'Student Shield Plus' && <CheckCircle className="h-6 w-6 text-purple-600" />} {/* Premium per year */}
                           </div>
                           <div>
                             <h4 className="font-semibold text-gray-800">{feature.title}</h4>
