@@ -11,19 +11,19 @@ const HowItWorksSection: React.FC = () => {
     },
     {
       icon: <FileText className="h-8 w-8 text-white" />,
-      title: '2.	Enter Parents Details',
+      title: '2.	Enter parent & nominee details (Child)',
       description: 'We’ll ask for the insured parent’s information and child’s details.',
       color: 'bg-teal-600'
     },
     {
       icon: <CreditCard className="h-8 w-8 text-white" />,
-      title: 'Make Payment',
+      title: 'Make The Payment',
       description: 'Use UPI, cards, or wallets.',
       color: 'bg-orange-600'
     },
     {
       icon: <Check className="h-8 w-8 text-white" />,
-      title: 'Boom! You\'re Covered',
+      title: 'Get covered instantly!',
       description: 'Instant policy confirmation and email notification.',
       color: 'bg-green-600'
     }
@@ -34,7 +34,7 @@ const HowItWorksSection: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
-            How It Works: <span className="text-indigo-600">Simple as 1-2-3!</span>
+           How do I buy the plan?: <span className="text-indigo-600">Simple as 1-2-3!</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Getting covered is easy.
