@@ -339,7 +339,7 @@ const PricingSection: React.FC = () => {
               🛡️ Join thousands of families who’ve protected their child’s education with Student Shield.
             </p>
             <p className="text-indigo-600 text-sm mt-2">
-              Both plans include MiCare wellness services for complete healthcare support
+              Both plans include  services for complete healthcare support
             </p>
           </motion.div>
         </div>
