@@ -51,18 +51,22 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="font-semibold text-white text-lg mb-4">Resources</h3>
             <ul className="space-y-2">
-              <li>
+              {/* <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">Help Center</a>
-              </li>
+              </li> */} 
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">File a Claim</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
-              </li>
+  <a href="https://drive.google.com/file/d/1Zbkkfd93Dg8NEbu-JuB8v2pDv_1o1x3j/view?usp=sharing" className="text-gray-400 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
+    Terms and Conditions
+  </a>
+</li>
+<li>
+  <a href="https://drive.google.com/file/d/1sVgziJGoLYRVPV8KYx7ujVx2ZwBZaZaM/view?usp=sharing" className="text-gray-400 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
+    Privacy Policy
+  </a>
+</li>
             </ul>
           </div>
           
