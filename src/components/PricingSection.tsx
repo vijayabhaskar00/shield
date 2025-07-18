@@ -120,7 +120,7 @@ const PricingSection: React.FC = () => {
     {
       id: 'student-shield-plus' as const,
       name: 'Student Shield Plus',
-      price: 1500,
+      price: 1999,
       period: 'year',
       popular: false,
       ageRange: '40-60 years',
@@ -198,7 +198,7 @@ const PricingSection: React.FC = () => {
           title: 'Premium per year (including gst)',
           value: '',
           details: [
-            'Rs 1500 per year'
+            'Rs 1999 per year'
           ]
         }
       ]

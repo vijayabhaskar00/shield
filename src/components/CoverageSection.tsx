@@ -203,7 +203,7 @@ const CoverageSection: React.FC = () => {
           <div className="inline-flex items-center gap-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-bold">
             <span>Student Shield: ₹999/year</span>
             <span className="text-indigo-200">|</span>
-            <span>Student Shield Plus: ₹1500/year</span>
+            <span>Student Shield Plus: ₹1999/year</span>
           </div>
         </div>
       </div>

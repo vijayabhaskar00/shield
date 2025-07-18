@@ -96,7 +96,7 @@ const PolicyForm: React.FC<PolicyFormProps> = ({
         },
         "student-shield-plus": {
             name: "Student Shield Plus",
-            price: 1500,
+            price: 1999,
             ageRange: "40-60 years",
             description: "Enhanced protection with life coverage",
             features: [

@@ -29,7 +29,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ openPolicyForm }) => {
               <br className="hidden sm:block" />
               <span className="text-yellow-100">Student Shield</span> from <span className="font-bold text-yellow-200">₹999/year</span>
               <br className="hidden sm:block" />
-              <span className="text-yellow-100">Student Shield Plus</span> from <span className="font-bold text-yellow-200">₹1500/year</span>
+              <span className="text-yellow-100">Student Shield Plus</span> from <span className="font-bold text-yellow-200">₹1999/year</span>
             </p>
             
             {/* Buttons */}
@@ -50,13 +50,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ openPolicyForm }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               <div className="bg-red-900/30 backdrop-blur-sm p-4 rounded-lg border border-red-500/30">
                 <h3 className="text-yellow-300 font-bold text-sm mb-1">Student Shield</h3>
-                <p className="text-red-100 text-xs">Accident + Health + MiCare</p>
+                <p className="text-red-100 text-xs">Accident + Health + Wellness Care</p>
                 <p className="text-yellow-200 font-bold">₹999/year</p>
               </div>
               <div className="bg-red-900/30 backdrop-blur-sm p-4 rounded-lg border border-red-500/30">
                 <h3 className="text-yellow-300 font-bold text-sm mb-1">Student Shield Plus</h3>
-                <p className="text-red-100 text-xs">Life Cover + MiCare</p>
-                <p className="text-yellow-200 font-bold">₹1500/year</p>
+                <p className="text-red-100 text-xs">Life Cover + Wellness Care </p>
+                <p className="text-yellow-200 font-bold">₹1999/year</p>
               </div>
             </div>
           </div>

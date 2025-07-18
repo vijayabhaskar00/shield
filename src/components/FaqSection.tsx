@@ -14,7 +14,7 @@ const FaqSection: React.FC = () => {
     },
     {
       question: "What's the difference between Student Shield and Student Shield Plus?",
-      answer: "•	Student Shield (₹999/year): Covers accidental events (hospitalization, death, disability). •	Student Shield Plus (₹1500/year): Adds life cover (death by any cause) to the existing benefits."
+      answer: "•	Student Shield (₹999/year): Covers accidental events (hospitalization, death, disability). •	Student Shield Plus (₹1900/year): Adds life cover (death by any cause) to the existing benefits."
     },
     {
       question: "How soon does coverage start?",
